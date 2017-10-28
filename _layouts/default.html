@@ -1,0 +1,61 @@
+---
+layout: compress
+---
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"
+  itemscope="" itemtype="http://schema.org/WebPage">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="description" content="{{ page.description }}" />
+    <meta name="keywords" content="{{ page.keywords | join:', ' | xml_escape }}" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"/>
+    <link rel="shortcut icon" href="/favicon.png"/>
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="/css/main.css"/>
+  </head>
+  <body>
+    <section>
+      <header>
+        <a href="/about.html">
+          <img src="/images/avatar.jpg" class="photo" alt="" itemprop="image"/>
+        </a>
+        <nav>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about.html">About</a></li>
+          </ul>
+        </nav>
+        <nav>
+          <ul>
+            <li><a href="https://github.com/IlyaZinkovich" rel="nofollow" title="Fork me on GitHub"><img src="/images/github-logo.svg" class="icon icon-github" alt="" itemprop="image"/></a></li>
+            <li><a href="https://twitter.com/intent/follow?screen_name=IlyaZinkovich" rel="nofollow" title="Follow me on Twitter"><img src="/images/twitter-logo.svg" class="icon icon-twitter" alt="" itemprop="image"/></a></li>
+            <li><a href="/rss.xml" rel="nofollow" title="Subscribe to my RSS feed"><img src="/images/rss-logo.svg" class="icon icon-rss" alt="" itemprop="image"/></a></li>
+            <li><a href="https://linkedin.com/in/ilyazinkovich" rel="nofollow" title="My LinkedIn profile"><img src="/images/linkedin-logo.svg" class="icon icon-linkedin" alt="" itemprop="image"/></a></li>
+            <li><a href="mailto:ilya.zinkovich@gmail.com" rel="nofollow" title="Email me"><img src="/images/email-logo.svg" class="icon icon-email" alt="" itemprop="image"/></a></li>
+          </ul>
+        </nav>
+        <form method="get" action="https://www.google.com/search">
+          <input name="sitesearch" value="ilyazinkovich.github.io" type="hidden"/>
+          <input type="text" name="q" placeholder="Search" autocomplete="off" size="30"/>
+        </form>
+      </header>
+      {{ content }}
+      <footer>
+        (c)
+        <span itemscope="" itemtype="http://schema.org/Person">
+          <span itemprop="name">Ilya Zinkovich</span>
+        </span>
+        <br/>
+        2017
+      </footer>
+    </section>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-1963507-32', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>

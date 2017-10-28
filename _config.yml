@@ -1,0 +1,40 @@
+title: Ilya Zinkovich
+email: ilya.zinkovich@gmail.com
+description: >
+  Blog about software engineering by Ilya Zinkovich
+baseurl: ""
+url: "http://ilyazinkovich.github.io"
+twitter_username: IlyaZinkovich
+github_username: IlyaZinkovich
+markdown: kramdown
+author:
+  name: "Ilya Zinkovich"
+  email: ilya.zinkovich@gmail.com
+encoding: utf-8
+timezone: Belarus/Minsk
+permalink: :year/:month/:day/:title.html
+exclude:
+  - README.md
+  - Gemfile.lock
+  - Gemfile
+  - Rakefile
+  - LICENSE.txt
+
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+  - jekyll-sitemap
+
+paginate: 8
+paginate_path: "p/:num"
+excerpt_separator: <!--more-->
+
+feed:
+  title: ilyazinkovich.github.io
+  subtitle: Ilya Zinkovich
+  path: rss.xml
+
+sass:
+  style: compressed
+  deploy_style: compressed
+  compile_in_place: false

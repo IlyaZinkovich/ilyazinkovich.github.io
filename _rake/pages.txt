@@ -1,0 +1,8 @@
+robots.txt
+about.html
+404.html
+favicon.png
+rss.xml
+sitemap.xml
+css/main.css
+images/avatar.jpg
