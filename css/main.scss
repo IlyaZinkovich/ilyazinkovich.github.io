@@ -6,6 +6,7 @@
 
 $black: #000;
 $white: #fff;
+$grey: lighten($black, 50);
 
 %gray { color: lighten($black, 50); }
 
@@ -19,7 +20,7 @@ $white: #fff;
   border: 0;
   box-sizing: border-box;
   font-family: 'Lora', serif;
-  font-size: 21px;
+  font-size: 18px;
   margin: 0;
   padding: 0;
 }
@@ -97,9 +98,9 @@ footer {
 }
 
 code {
-  background-color: $white;
-  border-radius: .2em;
+  background-color: $grey;
   font-family: monospace;
+  margin-top: 5px;
   padding: .1em .2em;
 }
 
