@@ -1,7 +1,7 @@
 ---
 layout: post
 date: 2018-04-08
-title: "Tackling the Database Coupling in Distributed Systems"
+title: "Uncovering the Database Coupling in Distributed Systems"
 description: |
 keywords:
   - distributed systems
@@ -13,7 +13,7 @@ categories: system design
 In the perfect world, services in distributed systems hide their data behind an interface. 
 Although [the shared database](http://www.enterpriseintegrationpatterns.com/patterns/messaging/SharedDataBaseIntegration.html) is a well-known services integration [anti-pattern](http://www.ben-morris.com/a-shared-database-is-still-an-anti-pattern-no-matter-what-the-justification), it's still one of the most used ones due to its reduced initial complexity and promising consistency guarantees.  
 
-Extracting services in a system with an overused shared database integration style becomes a nightmare. Even if you find a subdomain to isolate, you still need to decouple its data from the rest of the system.  
+Extracting services in a system with an overused shared database integration style becomes a nightmare. Even if you find a sub-domain to isolate, you still need to decouple its data from the rest of the system.  
 
 My point is that we can gradually solve this problem avoiding massive [rewrites](https://www.youtube.com/watch?v=AXU4-VlAAcg). But we need better tools to do this.
 
@@ -43,12 +43,12 @@ Querying the graph via the web interface uncovers the following structure.
 
 ![alt text](https://bit.ly/2HjiwhY?style=centered "whole system graph")
 
-As we can see, the mobile client accesses services API to create some records in the database and get them later. Core and subdomain services access the table in the underlying data storage using SQL queries. But there is something more.
+The mobile client accesses services API to create some records in the database and get them later. Core and sub-domain services access the table in the underlying data storage using SQL queries. But there is something more.
 
 Nailing down the problem with another query, we identify the data leak.
 
 ![alt text](https://bit.ly/2EtAz2b?style=centered "data leak")
 
-When the mobile client accesses the core API, the core gets some data from the subdomain service and additionally grabs some data from the database table directly.
+When the mobile client accesses the core API, the core gets some data from the sub-domain service and additionally retrieves some data from the database table directly.
 
-We've just identified the problem. The next step is just to go and fix it. Hopefully, we know how to do this.
+Problem identified. The only thing left is to grab your software skills and fix it.
