@@ -112,3 +112,8 @@ code {
   width: 20px;
   height: 20px;
 }
+
+img[src$="centered"] {
+  display:block;
+  margin: 0 auto;
+}
