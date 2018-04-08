@@ -27,6 +27,7 @@ $grey: lighten($black, 50);
 
 body {
   padding: 2em;
+  color: black;
 }
 
 section {
@@ -116,4 +117,9 @@ code {
 img[src$="centered"] {
   display:block;
   margin: 0 auto;
+}
+
+a, a:visited {
+  color: inherit;
+  text-decoration: underline;
 }
