@@ -1,7 +1,7 @@
 title: Ilya Zinkovich
 email: ilya.zinkovich@gmail.com
 description: >
-  Blog about software engineering by Ilya Zinkovich
+  Blog about software engineering
 baseurl: ""
 url: "http://ilyazinkovich.github.io"
 twitter_username: IlyaZinkovich
@@ -24,6 +24,7 @@ plugins:
   - jekyll-feed
   - jekyll-paginate
   - jekyll-sitemap
+  - jekyll-seo-tag
 
 paginate: 8
 paginate_path: "p/:num"
