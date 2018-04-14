@@ -1,7 +1,7 @@
 ---
 layout: post
-date: 2018-04-15
-title: "Data Mining Git for Design Insight"
+date: 2018-04-14
+title: "Data Mining Git for Design Insights"
 description: |
 keywords:
   - code analysis

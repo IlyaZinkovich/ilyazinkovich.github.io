@@ -1,7 +1,7 @@
 ---
 layout: post
 date: 2018-04-08
-title: "Uncovering the Database Coupling in Distributed Systems"
+title: Uncovering the Database Coupling in Distributed Systems
 description: |
 keywords:
   - distributed systems
