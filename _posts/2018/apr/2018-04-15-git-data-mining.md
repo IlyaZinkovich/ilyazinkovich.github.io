@@ -19,7 +19,7 @@ Git, in its turn, is not only a must-have tool in our day-to-day job but also a 
 Recently I watched the talk by Greg Young about [how to get productive on a project in 24h](https://youtu.be/KaLROwp-VDY?t=1m24s).
 He proposed to measure a number of changes we make to files over time and argues that in a wealthy code base we tend to make intensive changes at the beginning and minor less frequent changes like a bug fix further.
 On the other hand, when we deal with a low-quality code, we go back to the same files again and again over the course of a project and make significant changes.  
-To test this assumption I've implemented this tool and analyzed the code of my favorite plugin - ["SonarLint"](https://plugins.jetbrains.com/plugin/7973-sonarlint).
+To test this assumption I've implemented this tool and analyzed the code of my favorite plugin - [Sonar Lint"](https://plugins.jetbrains.com/plugin/7973-sonarlint).
 
 ![alt text](https://bit.ly/2qxeA6g?style=centered "changes frequency analysis results")
 
