@@ -1,5 +1,6 @@
 ---
 layout: default
+comments: true
 ---
 
 <article itemscope="" itemtype="http://schema.org/BlogPosting">
@@ -29,18 +30,6 @@ layout: default
   {{ content }}
 </article>
 
-<div class="disqus" id="disqus_thread"></div>
-<script>
-var disqus_config = function () {
-  this.page.url = document.location.href.split('?')[0].split('#')[0];
-  this.page.identifier = this.page.url;
-};
-(function() {
-    var d = document, s = d.createElement('script');
-    s.src = '//ilyazinkovich.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-})();
-</script>
-<script id="dsq-count-scr" src="//ilyazinkovich.disqus.com/count.js" async></script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+{% if site.disqus.shortname %}
+  {% include disqus_comments.html %}
+{% endif %}

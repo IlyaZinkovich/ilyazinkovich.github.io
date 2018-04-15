@@ -38,3 +38,6 @@ sass:
   style: compressed
   deploy_style: compressed
   compile_in_place: false
+
+disqus:
+  shortname: ilyas-blog-about-software-engineering
