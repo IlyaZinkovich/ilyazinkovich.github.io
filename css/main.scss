@@ -64,11 +64,19 @@ header {
 }
 
 article {
-  margin: 4em 0;
+  margin: 3em 0;
 
   h1 {
     font-size: 38px;
     font-weight: bold;
+  }
+
+  h1 a {
+    text-decoration: none;
+    span {
+      font-size: 38px;
+      font-weight: bold;
+    }
   }
 
   h2 {
