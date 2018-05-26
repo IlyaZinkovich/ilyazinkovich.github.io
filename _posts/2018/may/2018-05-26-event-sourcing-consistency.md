@@ -1,6 +1,6 @@
 ---
 layout: post
-date: 2018-05-27
+date: 2018-05-26
 title: "Consistency in Event Sourced Systems"
 description: |
 keywords:
@@ -20,22 +20,32 @@ Let's explore how not to get into this trap and build an event sourced system pr
 
 <!--more-->
 
-### Introducing the Shopping Cart Example
+## Introducing the Shopping Cart Example
 Everything starts with modelling the problem domain.  
 Our domain will be e-commerce where we'll model a popular shopping cart concept.  
 We can add products to the shopping cart until we reach its capacity and query the quantity of products in it.
 
 ![alt text](https://bit.ly/2IJ2gea?style=centered "domain model")
 
-### Promising Event Sourced Shopping Cart Implementation
+## Promising Event Sourced Shopping Cart Implementation
 When you are first getting familiar with event sourcing you most likely build the following kind of a system.
 
 {% gist 678b251592d522bf2883a51f7a17351b %}
 
+This design is good enough for a single-threaded environment in a single server. But adding this class to concurrent environment like a Spring Boot web application can cause havoc that can be simulated with the following test.
+
+{% gist e02b7d13585bff73461e9911cd7621d2 %}
+
+In each thread we create a `ShoppingCart` instance from the event store and send multiple `AddProduct` commands.
+Then we verify that the shopping cart is full and the main business rule is not violated: "quantity of products in a cart is not greater than the cart capacity". Each time we get different number of products in a shopping cart.
+This code is obviously not thread-safe and doesn't scale out no matter what technology you use for event store (Kafka, DynamoDB, you name it). Although it's a legit event sourcing implementation, the application state quickly becomes inconsistent instead of eventually consistent as we thought.
+
+## Last Hope
+
 In order to fix this unfortunate issue we need to redesign our solution.
 Keeping in mind [the first law of distributed systems](https://martinfowler.com/bliki/FirstLaw.html), let's build a system where there is only one instance of each aggregate at runtime.
 
-In reality, when you're building a scalable e-commerce website, you will create a `ShoppingCart` actor per user and shard these actors multiple machines using [akka-cluster](https://doc.akka.io/docs/akka/2.5/cluster-usage.html) while preserving the essential constraint of having only one instance of aggregate at runtime. Then you can enrich your system with eventually consistent projections of the event store.
+In reality, when you're building a scalable e-commerce website, you will create a `ShoppingCart` actor per user and shard these actors to multiple machines using [akka-cluster](https://doc.akka.io/docs/akka/2.5/cluster-usage.html) while preserving the essential constraint of having only one instance of aggregate at runtime. Then you can enrich your system with eventually consistent projections of the event store.
 
 And still the `ShoppingCart` aggregate will be a small island of strong consistency in the cruel world of distributed systems.
 
