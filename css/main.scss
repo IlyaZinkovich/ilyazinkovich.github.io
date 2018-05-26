@@ -19,10 +19,18 @@ $grey: lighten($black, 50);
 * {
   border: 0;
   box-sizing: border-box;
-  font-family: 'Lora', serif;
-  font-size: 18px;
   margin: 0;
   padding: 0;
+}
+
+p, h1, h2, h3, h4, h5 {
+  font-family: 'Lora', serif;
+  font-size: 18px;
+}
+
+.link {
+  font-family: 'Lora', serif;
+  font-size: 18px;
 }
 
 body {
@@ -108,14 +116,15 @@ footer {
   @extend %gray;
   @extend %center;
   font-size: .8em;
+  font-family: 'Lora', serif;
 }
 
-code {
-  background-color: #d0d0d0;
-  font-family: monospace;
-  margin-top: 5px;
-  padding: .1em .2em;
-}
+// code {
+//   background-color: #d0d0d0;
+//   font-family: monospace;
+//   margin-top: 5px;
+//   padding: .1em .2em;
+// }
 
 .disqus {
   margin: 4em 0;
@@ -134,4 +143,9 @@ img[src$="centered"] {
 a, a:visited {
   color: inherit;
   text-decoration: underline;
+}
+
+blockquote {
+  padding: 0 1em;
+  border-left: 0.25em solid #dfe2e5;
 }

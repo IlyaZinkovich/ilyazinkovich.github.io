@@ -12,7 +12,7 @@ keywords:
     <p>{{ post.date | date: "%B %-d, %Y" }}</p>
     <h1><a href="{{ post.url | prepend: site.baseurl }}"><span>{{ post.title }}</span></a></h1>
     {{ post.excerpt }}
-    <a href="{{ post.url | prepend: site.baseurl }}">continue reading...</a>
+    <a class="link" href="{{ post.url | prepend: site.baseurl }}">continue reading...</a>
   </article>
 {% endfor %}
 

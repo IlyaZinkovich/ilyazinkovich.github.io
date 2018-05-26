@@ -24,6 +24,7 @@ plugins:
   - jekyll-feed
   - jekyll-paginate
   - jekyll-sitemap
+  - jekyll-gist
 
 paginate: 8
 paginate_path: "p/:num"
