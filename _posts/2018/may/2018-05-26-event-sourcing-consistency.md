@@ -44,7 +44,7 @@ This code is obviously not thread-safe and doesn't scale out no matter what tech
 
 In order to fix this unfortunate issue, we need to redesign our solution.
 Keeping in mind [the first law of distributed systems](https://martinfowler.com/bliki/FirstLaw.html), let's build a system where there is only one instance of each aggregate at run time.
-Instead of reinventing the wheel, we'll use high-level concurrency primitives from [Akka](https://akka.io/), building our system using actor model.
+Instead of reinventing the wheel, we'll use high-level concurrency primitives from ["Akka"](https://akka.io/), building our system using actor model.
 
 {% gist 9e831563163646ea29fa3bd07f85414f %}
 
@@ -56,6 +56,6 @@ The following test proves the strong consistency of this solution.
 
 {% gist 620f977331d4c7eb7bf94cbd0e743d89 %}
 
-While operating on a large scale, you'll create a `ShoppingCart` actor per client of your app and shard these actors to multiple machines using [Akka-Cluster](https://doc.akka.io/docs/akka/2.5/cluster-usage.html) while preserving the essential constraint of having only one instance of aggregate at run time. Then you can enrich your system with eventually consistent projections of the event store.
+While operating on a large scale, you'll create a `ShoppingCart` actor per client of your app and shard these actors to multiple machines using ["Akka-Cluster"](https://doc.akka.io/docs/akka/2.5/cluster-usage.html) while preserving the essential constraint of having only one instance of aggregate at run time. Then you can enrich your system with eventually consistent projections of the event store.
 
 And still, the `ShoppingCart` aggregate will be a small island of strong consistency in the cruel world of distributed systems.
