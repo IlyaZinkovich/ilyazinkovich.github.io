@@ -60,4 +60,4 @@ While operating on a large scale, you'll create a `ShoppingCart` actor per clien
 
 And still, the `ShoppingCart` aggregate will be a small island of strong consistency in the cruel world of distributed systems.
 
-Here is a link to the repository containing source code: [https://github.com/IlyaZinkovich/event-sourcing-consistency](https://github.com/IlyaZinkovich/event-sourcing-consistency)
+Here is a link to the repository containing source code: https://github.com/IlyaZinkovich/event-sourcing-consistency
