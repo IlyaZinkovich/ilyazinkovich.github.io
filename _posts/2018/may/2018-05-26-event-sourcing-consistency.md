@@ -38,15 +38,24 @@ This design is good enough for a single-threaded environment in a single server.
 
 In each thread we create a `ShoppingCart` instance from the event store and send multiple `AddProduct` commands.
 Then we verify that the shopping cart is full and the main business rule is not violated: "quantity of products in a cart is not greater than the cart capacity". Each time we get different number of products in a shopping cart.
-This code is obviously not thread-safe and doesn't scale out no matter what technology you use for event store (Kafka, DynamoDB, you name it). Although it's a legit event sourcing implementation, the application state quickly becomes inconsistent instead of eventually consistent as we thought.
+This code is obviously not thread-safe and doesn't scale out no matter what technology you use for event store (Kafka, Cassandra, DynamoDB, you name it). Although it's a legit event sourcing implementation, the application state quickly becomes inconsistent instead of being eventually consistent as we thought.
 
 ## Last Hope
 
 In order to fix this unfortunate issue we need to redesign our solution.
 Keeping in mind [the first law of distributed systems](https://martinfowler.com/bliki/FirstLaw.html), let's build a system where there is only one instance of each aggregate at runtime.
+Instead of reinventing the wheel, we'll use high-level concurrency primitives from [akka](https://akka.io/), building our system using actor model.
 
-In reality, when you're building a scalable e-commerce website, you will create a `ShoppingCart` actor per user and shard these actors to multiple machines using [akka-cluster](https://doc.akka.io/docs/akka/2.5/cluster-usage.html) while preserving the essential constraint of having only one instance of aggregate at runtime. Then you can enrich your system with eventually consistent projections of the event store.
+{% gist 9e831563163646ea29fa3bd07f85414f %}
 
-And still the `ShoppingCart` aggregate will be a small island of strong consistency in the cruel world of distributed systems.
+The the rest of the application code should ensure that we create the instance of this actor only once and then reference it by its name.
 
-Keep an eye on your distributed system, define consistency boundaries right and don't follow the trends blindly.
+{% gist d4e366d945a48dfda4eba3f2c6b9cb64 %}
+
+The following test proves strong consistency of this solution.
+
+{% gist 620f977331d4c7eb7bf94cbd0e743d89 %}
+
+While operating on a large scale, you'll create a `ShoppingCart` actor per client of your app and shard these actors to multiple machines using [akka-cluster](https://doc.akka.io/docs/akka/2.5/cluster-usage.html) while preserving the essential constraint of having only one instance of aggregate at runtime. Then you can enrich your system with eventually consistent projections of the event store.
+
+And still, the `ShoppingCart` aggregate will be a small island of strong consistency in the cruel world of distributed systems.
