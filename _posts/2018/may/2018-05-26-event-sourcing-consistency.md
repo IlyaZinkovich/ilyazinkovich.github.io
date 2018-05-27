@@ -8,6 +8,7 @@ keywords:
   - consistency
   - actors
 categories: event sourcing
+urlimage: https://bit.ly/2IJ2gea
 ---
 
 Event Sourcing became very popular with the recent rise of [reactive systems](https://www.reactivemanifesto.org/). However, the idea is not new and has a very concise definition polished with the years of research:  
