@@ -10,7 +10,7 @@ keywords:
 categories: event sourcing
 ---
 
-Event Sourcing recently became very popular with the rise of [reactive systems](https://www.reactivemanifesto.org/). However, the idea is not new and has a very concise definition polished with the years of research:  
+Event Sourcing became very popular with the recent rise of [reactive systems](https://www.reactivemanifesto.org/). However, the idea is not new and has a very concise definition polished with the years of research:  
 >"Capture all changes to an application state as a sequence of events"  
 >[Martin Fowler, 12 December 2005](https://martinfowler.com/eaaDev/EventSourcing.html).  
 
