@@ -56,7 +56,7 @@ The following test proves the strong consistency of this solution.
 
 {% gist 620f977331d4c7eb7bf94cbd0e743d89 %}
 
-While operating on a large scale, you'll create a `ShoppingCart` actor per client of your app and shard these actors to multiple machines using [akka-cluster"](https://doc.akka.io/docs/akka/2.5/cluster-usage.html) while preserving the essential constraint of having only one instance of aggregate at runtime. Then you can enrich your system with eventually consistent projections of the event store.
+While operating on a large scale, you'll create a `ShoppingCart` actor per client of your app and shard these actors to multiple machines using [akka-cluster](https://doc.akka.io/docs/akka/2.5/cluster-usage.html) while preserving the essential constraint of having only one instance of aggregate at runtime. Then you can enrich your system with eventually consistent projections of the event store.
 
 And still, the `ShoppingCart` aggregate will be a small island of strong consistency in the cruel world of distributed systems.
 
