@@ -18,7 +18,7 @@ Services communication is a fundamental part of any distributed system design. T
 
 Suppose we're building a delivery service in which we pay couriers per delivery. Payments service is already in place and is busy transferring money to couriers' accounts. To improve quality of service, we decided to encourage couriers giving them monetary bonuses and increasing payments based on their performance. Just for this purpose, we start building Incentives service.
 
-## Let's design it the synchronous way
+## Synchronous way
 
 Incentives service needs to expose API for giving couriers various types of bonuses and keeping track of their performance.
 While sketching a simple system level diagram, we decide that Incentives service will synchronously call Payments when we need to pay money for a bonus and Payments will call Incentives when it needs to know couriers' performance to make payment amount adjustment.  
