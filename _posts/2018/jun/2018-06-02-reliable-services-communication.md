@@ -60,4 +60,5 @@ Asynchronous communication enabled true decoupling of services in space and time
 Synchronous services communication is easy to understand. It closely resembles the function calls made inside a process on a single machine. But this simple concept breaks when we try to apply it to distributed systems design.  
 Although a lot of the systems are designed in this way, we can start using asynchronous services communication making them inherently more reliable.  
 
-Here is a link to the repository containing source code: https://github.com/IlyaZinkovich/event-sourcing-consistency
+Here is a link to the repository containing source code: 
+[https://github.com/IlyaZinkovich/reliable-communication](https://github.com/IlyaZinkovich/reliable-communication)
