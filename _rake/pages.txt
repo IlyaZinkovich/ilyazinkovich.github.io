@@ -5,4 +5,3 @@ favicon.png
 rss.xml
 sitemap.xml
 css/main.css
-images/avatar.jpg

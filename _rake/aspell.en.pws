@@ -8,3 +8,5 @@ akka
 runtime
 https://github.com/IlyaZinkovich/event-sourcing-consistency
 https://github.com/IlyaZinkovich/reliable-communication
+https://github.com/IlyaZinkovich/data-driven-changes
+https://github.com/IlyaZinkovich/scientist
