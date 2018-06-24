@@ -34,7 +34,7 @@ Hystrix implements [Circuit Breaker](https://martinfowler.com/bliki/CircuitBreak
 
 ## Community-Driven Approach
 
-Hystrix wouldn't receive recognition if it wasn't easy to use.  
+Hystrix wouldn't succeed if it wasn't easy to use.  
 In Java community "easy" means that you add an annotation and it works out of the box. And it really works:
 
 {% gist b1df73ad08898b8d34d8008d10a0bb27 %}
