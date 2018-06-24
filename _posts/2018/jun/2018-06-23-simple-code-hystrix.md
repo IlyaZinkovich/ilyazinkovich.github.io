@@ -86,7 +86,7 @@ Testing is simple. You don't need a Spring context and Spring testing components
 
 Let's summarize what we just achieved:  
 
-- Compiler is helping you. Any refactoring you can imagine will no longer break your app. Moreover, the fallback function is no longer marked as unused code. That reduces some compiler warnings and makes static code analysis more precise.  
+- Compiler is helping you. Any refactoring you can imagine will no longer break your app. Moreover, the fallback function is no longer marked as unused code. This reduces some compiler warnings and makes static code analysis more precise.  
 - Debugging is straightforward. The entry point into Hystrix functionality is right behind your eyes, and it's just a simple Java object that is much more predictable than the aspect. If anything fails, you can quickly locate the failure.  
 - The code is robust. We reduced the number of moving parts to just the core Hystrix library. Moreover, you can integrate this code into any Java application without any additional configuration. It's just hard to make a mistake.  
 
