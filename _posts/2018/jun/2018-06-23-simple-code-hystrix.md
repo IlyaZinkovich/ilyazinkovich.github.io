@@ -39,7 +39,7 @@ In Java community "easy" means that you add an annotation and it works out of th
 
 {% gist b1df73ad08898b8d34d8008d10a0bb27 %}
 
-`callWebService()` method will return a default response if a web service throws an exception and you'll see the errors statistic on a picturesque dashboard. Additionally, you can configure Hystrix command in a way that it won't even call the web service after a specified amount of errors. 
+`callWebService()` method will return a default response if a web service throws an exception and you'll see the errors statistic on a picturesque dashboard. Additionally, you can configure Hystrix command in a way that it won't even call the web service after a specified amount of errors.   
 Looks awesome and, without a doubt, it's easy.  
 
 Let's test it. How can we do this?  
@@ -61,7 +61,7 @@ Although we easily implemented basic fallback functionality, we added accidental
 ## Simple Approach
 
 First thought is that Hystrix is just a poorly designed library. But surprisingly it's the opposite.
-If we read the [wiki](https://github.com/Netflix/Hystrix/wiki/How-To-Use), it appears that there is a `HystrixCommand` class that has a well-defined interface.
+After reading the [wiki](https://github.com/Netflix/Hystrix/wiki/How-To-Use) it appears that there is a `HystrixCommand` class that has a well-defined interface.
 
 Let's create a Hystrix command for our use case.
 
