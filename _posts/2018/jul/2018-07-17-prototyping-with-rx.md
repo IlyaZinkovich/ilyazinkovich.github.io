@@ -12,7 +12,7 @@ urlimage:
 ---
 
 When we design a distributed system often comes a moment when we agree on the high-level architecture, but we're still uncertain that it fits the business process we're modeling. The most common way to overcome the dead end is to start building a full-blown solution and calibrate it along the way.  
-Alternatively, I propose to use lightweight prototyping techniques. Representing distributed system design in a runnable code, we can enable experimentation and reduce risks associated with bad architectural decisions as early as possible.  
+Alternatively, we can use lightweight prototyping techniques. Representing distributed system design in a runnable code, we can enable experimentation and reduce risks associated with bad architectural decisions as early as possible.  
 Let's prototype a part of a large-scale delivery service using building blocks from RxJava.
 
 <!--more-->
@@ -24,13 +24,12 @@ The business process consists of a few steps:
 1. search couriers in the order pick-up area;
 2. filter couriers according to business rules;
 3. sort remaining couriers by estimated time of arrival (ETA) 
-assigning the courier with the least ETA to the order.
+assigning the courier with the best ETA to the order.
 
 The following sketch defines fundamental components of our initial design.
 ![alt text](https://bit.ly/2NVG3sv?style=centered "dispatch flow")
 
 The system should sustain a large flow of incoming orders and support evolution of each stage in the process.
-We decided to build an event-stream processing pipeline matching the business process.
 
 ## Prototyping
 
@@ -55,17 +54,17 @@ But the reality is different. There might be no couriers in a specified location
 
 It's time to ask domain expert what should happen in this situation. 
 One possible answer is to repeat the dispatch process a few times and return error response if we cannot fulfill the order.  
-Search and Filter components share retry logic. It might be a sign that we need to extract it into a separate component. Let's try it out.
+Search and Filter components share retry logic. It might be a sign that we need to extract it into a separate component. We can easily validate this assumption implementing it in our prototype.
 
-The high-level diagram will look a bit different now:
+The high-level diagram will look a bit different:
 
 ![alt text](https://bit.ly/2NmQhB3?style=centered "dispatch flow")
 
-Redispatch component won't differ too much from the others:
+Redispatch is just another Java object:
 
 {% gist 71da610f78cfc720497dbd8945b7766f %}
 
-And the final test will look as follows:
+The test will look as follows:
 
 {% gist 2c21c5be16fb6915ff18d000d0df8c1f %}
 
