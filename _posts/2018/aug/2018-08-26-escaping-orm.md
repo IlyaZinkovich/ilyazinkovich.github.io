@@ -99,12 +99,25 @@ The following code retrieves comments and authors data for each comment with jus
 {% gist 8d837f48f67f8f4b35c10fd874ffba0d %}
 
 Sometimes it's not enough to have one model for both reads and writes. Writes are supposed to operate as little data as possible in the simplest possible way. Reads are completely different. They aggregate data from multiple sources and provide advanced querying capabilities such as filtering, pattern matching, pagination. 
-The solution is to create a separate model that fits domain use cases for reads ([CQRS](https://martinfowler.com/bliki/CQRS.html)). It might be as simple as just providing a set of objects that query the database using raw SQL or not as simple as synchronizing our data with a full-text search engine.  
-I remember one project on which we needed to provide full-text search capabilities for the data stored in the Oracle database. We decided to use Hibernate Search on top of traditional JPA mapping. It was a dead-end. Today I would seriously consider having a separate model.
+The solution is to create a separate model that fits domain use cases for reads ([CQRS](https://martinfowler.com/bliki/CQRS.html)). It might be as simple as just providing a set of objects that query the database using raw SQL or as complex as synchronizing our data with a full-text search engine. I remember one project on which we needed to provide full-text search capabilities for the data stored in the Oracle database. We decided to use Hibernate Search on top of traditional JPA mapping. It was a dead-end. Today I would seriously consider having a separate model.
 
-## Cross-Module Rules
+## Cross-Module Requirements
 
+Here comes a new requirement. When ticket status is updated to "done" set remaining time to 0.
 
+Traditionally we'd implement this requirement as follows.
+
+{% gist 57769914c84d228e407e39002ac4cd16 %}
+
+As you may notice, we coupled ticket management functionality to time tracking.  
+
+Alternatively, we can use publish-subscribe mechanism between `ticket` and `time tracker` module.
+
+![alt text](https://bit.ly/2PkOjmm?style=centered "publish-subscribe")
+
+`ticket` module publishes events for each status change, while `time tracker` processes them in the time tracking context.
+
+{% gist ecb7950320085366d4096a66325b3760 %}
 
 ## Conclusion
 
