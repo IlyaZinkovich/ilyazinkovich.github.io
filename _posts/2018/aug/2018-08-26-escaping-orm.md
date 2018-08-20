@@ -32,7 +32,7 @@ Experienced enterprise Java developer quickly builds a relational model of our d
 
 ![alt text](https://bit.ly/2was1Ll?style=centered "relational tickets")
 
-Then, keeping an eye on [a cheat-sheet](https://en.wikibooks.org/wiki/Java_Persistence/OneToMany), the same developer creates a JPA mapping.
+Then, keeping an eye on [the cheat-sheet](https://en.wikibooks.org/wiki/Java_Persistence/OneToMany), the same developer creates a JPA mapping.
 
 {% gist edb1a74b565dee7853813e245aae12a4 %}
 
@@ -45,10 +45,10 @@ And we realize there are multiple ways to do this and it's hard to say which one
 
 {% gist 4254df9747b7b7a5de535594e24b4e0a %}
 
-Which one is going to work in our case depends on the parameters of JPA annotations in our mappings.  
+Which one is going to work in our case depends on the parameters of JPA annotations in our mappings ([on cascade effects in particular](https://vladmihalcea.com/a-beginners-guide-to-jpa-and-hibernate-cascade-types/)).  
 Most of the time people fiddle with code until something finally works. Rest assured, you'll see all three approaches together on a real project.  
 
-This traditional mapping creates direct coupling between all the entities. The inherent complexity of objects persistence affects the rest of the application leaking into the business logic. The problem gets even worse over time until the codebase becomes a huge mess.  
+This traditional mapping creates direct coupling between all the entities. The inherent complexity of objects persistence affects the rest of the application leaking into the business logic. The problem gets even worse over time until the codebase becomes one huge mess.  
 However, there is a solution.
 
 ## Modular Approach
@@ -74,22 +74,37 @@ Let's persist a comment with a new mapping.
 
 {% gist 323014e270c79a0fa4d2c56b139a8ea9 %}
 
-Notice how simple it is. Interestingly, now there is only one way to persist the comment, and it doesn't require the in-depth knowledge of Hibernate framework. Moreover, this approach saves up to two database roundtrips that were previously needed to get the corresponding ticket and author objects. There is no direct coupling between objects in our system anymore.  
-Notice how we use the term `Author` that better fits our comments domain than the general `Colleague` term, although the corresponding table still has `COLLEAGUES` name. This naming technique helps to bridge the gap between domain experts and developers who implement the system with the shared domain language.
+Notice how simple it is. Interestingly, now there is only one way to persist the comment, and it doesn't require the in-depth knowledge of Hibernate framework. Moreover, this approach saves up to two database roundtrips that were previously needed to get the corresponding ticket and author objects for new comment persistence.  
+And, most importantly, we enabled unconstrained modules evolution within their boundaries.
+We can add any functionality to existing modules and introduce new modules without worrying that they will affect or complicate each other.  
+We can assemble the following view with 4 asynchronous/parallel calls to respective modules. 
 
-However, not all business requirements are easy to implement in a new model. Suppose we need to show the comments together with their authors on the same view.  
-It's easy to do with the traditional model.
+![alt text](https://bit.ly/2whmX7Z?style=centered "all modules")
+
+Operations such as status change, colleague avatar change, commenting or time tracking are local to the module. It means we can implement and tune them independently.  
+
+## Data Collocation
+
+Real-life requirements might be more complicated.  
+
+Suppose we need to show **the comments together with their author name** on the same view.  
+
+It might be tempting to use the traditional mapping in which comment object already has a reference to its author. The following code together with eagerly loaded authors will produce the required result.
 
 {% gist d76e82628aa3159ce9b4faa0fda1793b %}
 
-Alternative will look as follows.
+However, physical collocation of data from multiple modules doesn't automatically means that these modules should have coupling.
+The following code retrieves comments and authors data for each comment with just two calls to respective modules.
 
 {% gist 8d837f48f67f8f4b35c10fd874ffba0d %}
 
-This complexity might not be acceptable. But this is not a problem of our modular mapping in particular.  
-Sometimes it's just not enough to have one model for both reads and writes. Writes are supposed to operate as little data as possible in the simplest possible way. Reads are completely different. They aggregate data from multiple sources and provide advanced querying capabilities such as filtering, pattern matching, pagination. 
+Sometimes it's not enough to have one model for both reads and writes. Writes are supposed to operate as little data as possible in the simplest possible way. Reads are completely different. They aggregate data from multiple sources and provide advanced querying capabilities such as filtering, pattern matching, pagination. 
 The solution is to create a separate model that fits domain use cases for reads ([CQRS](https://martinfowler.com/bliki/CQRS.html)). It might be as simple as just providing a set of objects that query the database using raw SQL or not as simple as synchronizing our data with a full-text search engine.  
 I remember one project on which we needed to provide full-text search capabilities for the data stored in the Oracle database. We decided to use Hibernate Search on top of traditional JPA mapping. It was a dead-end. Today I would seriously consider having a separate model.
+
+## Cross-Module Rules
+
+
 
 ## Conclusion
 
