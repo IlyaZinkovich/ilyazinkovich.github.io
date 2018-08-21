@@ -1,6 +1,6 @@
 ---
 layout: post
-date: 2018-08-26
+date: 2018-08-20
 title: "Escaping the ORM-Imposed Coupling"
 description: |
 keywords:
@@ -26,7 +26,7 @@ This time I'd like to discuss the roots of this problem and provide a solution t
 
 Suppose we're building an issue-tracking system like JIRA and it's going to be a Java application with data stored in a relational database.
 
-The central domain concept in our system is a **ticket**. Tickets are reported by colleagues collaborating on a project and contain **description**, **reporter name**, and a list of **comments** with some **text** and the **author**.
+The central domain concept in our system is a **ticket**. **Tickets** are reported by **colleagues** collaborating on a project and contain **description**, **reporter name**, and a list of **comments** with some **text** and the **author**.
 
 Experienced enterprise Java developer quickly builds a relational model of our domain.
 
@@ -67,7 +67,7 @@ These objects do not contain a direct reference to each other. There are no coll
 
 {% gist f133473bf775bfe7af6254dad63354fb %}
 
-Yes, this is XML configuration. Although I'm not a huge fan of XML, there is no other way to keep your domain objects clean and at the same time provide persistence support with Hibernate. However, I'd even argue that it gives better visibility of the mapping than the annotation-based approach.  
+Yes, this is XML configuration. Although I'm not a huge fan of XML, there is no other way to keep your domain objects clean and at the same time provide persistence support with Hibernate. However, I'd even argue that it gives better visibility of the mapping than the annotation-based approach. If you don't like it, you can use JPA annotations.  
 Another thing that may seem strange is that all identifiers have wrappers. `authorId` is not just a `long` value - it's an instance of `AuthorId` class. It helps to make your domain logic free of implementation details such as the internal representation of identifiers and provides a meaningful abstraction for dependency between the objects in your system instead of direct object references.  
 
 Let's persist a comment with a new mapping.
@@ -76,9 +76,9 @@ Let's persist a comment with a new mapping.
 
 Notice how simple it is. Now, there is only one way to persist the comment, and it doesn't require the in-depth knowledge of Hibernate framework. Moreover, this approach saves up to two database roundtrips that were previously needed to get the corresponding ticket and author objects for new comment persistence.  
 And, most importantly, we paved the way for modularity in our system. 
-By default each entity forms a foundation of a separate module. It's much easier to merge two modules than decompose already coupled mess.
-We can add any functionality to existing modules and introduce new modules without worrying that they will affect or complicate each other.  
-We can assemble the following view with 4 asynchronous/parallel calls to respective modules. 
+By default, each entity forms a foundation of a separate module. On the long run, it's much easier to merge independent modules than decomposing already coupled mess. If we see a natural dependency between entities required to keep our model consistent, we can represent this dependency in code, but not the other way around.  
+
+We can add any functionality to existing modules and introduce new modules without worrying that they will affect or complicate each other. We can assemble the following view with asynchronous/parallel calls to respective modules keeping our system resilient to individual module failure. 
 
 ![alt text](https://bit.ly/2whmX7Z?style=centered "all modules")
 
@@ -94,32 +94,34 @@ It might be tempting to use the traditional mapping in which comment object alre
 
 {% gist d76e82628aa3159ce9b4faa0fda1793b %}
 
-However, physical collocation of data from multiple modules doesn't automatically means that these modules should have coupling.
+However, physical collocation of data from multiple modules doesn't automatically mean that these modules must have coupling.
 The following code retrieves comments and authors data for each comment with just two calls to respective modules.
 
 {% gist 8d837f48f67f8f4b35c10fd874ffba0d %}
 
-Sometimes it's not enough to have one model for both reads and writes. Writes are supposed to operate as little data as possible in the simplest possible way. Reads are completely different. They aggregate data from multiple sources and provide advanced querying capabilities such as filtering, pattern matching, pagination. 
-The solution is to create a separate model that fits domain use cases for reads ([CQRS](https://martinfowler.com/bliki/CQRS.html)). It might be as simple as just providing a set of objects that query the database using raw SQL or as complex as synchronizing our data with a full-text search engine. I remember one project on which we needed to provide full-text search capabilities for the data stored in the Oracle database. We decided to use Hibernate Search on top of traditional JPA mapping. It was a dead-end. Today I would seriously consider having a separate model.
+As you may notice, our modular mapping is highly optimized for writes, but reads might lead to higher complexity.
+Sometimes it's just not enough to have one model for both reads and writes. Writes are supposed to operate as little data as possible in the simplest possible way. Reads are completely different. They aggregate data from multiple sources and provide advanced querying capabilities such as filtering, pattern matching, pagination. 
+The solution is to create a separate model that fits domain use cases for reads ([CQRS](https://martinfowler.com/bliki/CQRS.html)). It might be as simple as just providing a set of objects that query the database using raw SQL or as complex as synchronizing our data with a full-text search engine. I remember one project on which we needed to provide full-text search capabilities for the data stored in the Oracle database. We decided to use Hibernate Search on top of traditional JPA mapping. Today I would seriously consider having a separate model.
 
 ## Cross-Module Requirements
 
 Here comes a new requirement. When ticket status is updated to "done" set remaining time to 0.
 
-Traditionally we'd implement this requirement as follows.
+Traditionally we'd implement this requirement creating a dependency between ticket management and time tracking functionality.
 
 {% gist 57769914c84d228e407e39002ac4cd16 %}
 
-As you may notice, we coupled ticket management functionality to time tracking.  
-
-Alternatively, we can use publish-subscribe mechanism between `ticket` and `time tracker` module.
+While using modular mapping, you might think of creating a service that provides a layer on top of `ticket` and `time tracker`. However, this solution is not better than the traditional one and leads to the same dependency between two modules.  
+Alternatively, we can implement the publish-subscribe mechanism to preserve the independence between `ticket` and `time tracker`.
 
 ![alt text](https://bit.ly/2PkOjmm?style=centered "publish-subscribe")
 
-`ticket` module publishes events for each status change, while `time tracker` processes them in the time tracking context.
+`ticket` module publishes events for each status change, while `time tracker` processes them in the time tracking context. 
 
 {% gist ecb7950320085366d4096a66325b3760 %}
 
-## Conclusion
+You can imagine how this simple solution naturally evolves into a scalable distributed system with services asynchronously communicating via messaging middleware without any "big bang" rewrite.  
 
-I'd advise careful research of the read and write patterns in your software system. General solutions recommended in tutorials don't fit all the problems. Lean towards the simplest, consistent and modular model and keep in mind that there might be more than one model to solve the problem in the most optimal way.
+## Summary
+
+Finally, it appears that the ORM is not the main problem. You can still use this tool while keeping an eye on the system modularity. And modularity is a key that enables agility. With a reduced complexity of our system components and a clearly defined contract between them, we can build better software that serves its purpose and aims towards the future.
