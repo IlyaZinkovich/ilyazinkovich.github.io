@@ -53,7 +53,7 @@ However, there is a solution.
 
 ## Modular Approach
 
-Suppose we're already in trouble. We inherited the legacy system above, and we're not allowed to change the database or even the database schema. However, we can still change the mapping.
+Let's take the database schema above and think of a better way to map our domain objects to the database.
 
 `@OneToMany` and `@ManyToOne` JPA annotations seem as they are the only means to represent the one-to-many relationship. That's not true and here is an alternative:  
 
@@ -74,8 +74,9 @@ Let's persist a comment with a new mapping.
 
 {% gist 323014e270c79a0fa4d2c56b139a8ea9 %}
 
-Notice how simple it is. Interestingly, now there is only one way to persist the comment, and it doesn't require the in-depth knowledge of Hibernate framework. Moreover, this approach saves up to two database roundtrips that were previously needed to get the corresponding ticket and author objects for new comment persistence.  
-And, most importantly, we enabled unconstrained modules evolution within their boundaries.
+Notice how simple it is. Now, there is only one way to persist the comment, and it doesn't require the in-depth knowledge of Hibernate framework. Moreover, this approach saves up to two database roundtrips that were previously needed to get the corresponding ticket and author objects for new comment persistence.  
+And, most importantly, we paved the way for modularity in our system. 
+By default each entity forms a foundation of a separate module. It's much easier to merge two modules than decompose already coupled mess.
 We can add any functionality to existing modules and introduce new modules without worrying that they will affect or complicate each other.  
 We can assemble the following view with 4 asynchronous/parallel calls to respective modules. 
 
