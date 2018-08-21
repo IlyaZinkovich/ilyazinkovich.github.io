@@ -114,8 +114,9 @@ Traditionally we'd implement this requirement creating a dependency between tick
 
 {% gist 57769914c84d228e407e39002ac4cd16 %}
 
-While using modular mapping, you might think of creating a service that provides a layer on top of `ticket` and `time tracker`. However, this solution is not better than the traditional one and leads to the same dependency between two modules.  
-Alternatively, we can implement the publish-subscribe mechanism to preserve the independence between `ticket` and `time tracker`.
+Imagine how this code grows when we introduce new effects of ticket status update. Each effect adds complexity and requires the client to think about potential failures in effect functionality. Do we need to revert the ticket status update if the remaining time cannot be updated right now? The whole time management functionality can be offline, and the client won't even see the wrong remaining time. We can accept updating the remaining time in the background. But how to achieve it?
+
+With the modular design, we can implement the publish-subscribe mechanism.
 
 ![alt text](https://bit.ly/2PkOjmm?style=centered "publish-subscribe")
 
@@ -123,7 +124,7 @@ Alternatively, we can implement the publish-subscribe mechanism to preserve the 
 
 {% gist ecb7950320085366d4096a66325b3760 %}
 
-You can imagine how this simple solution naturally evolves into a scalable distributed system with services asynchronously communicating via messaging middleware without any "big bang" rewrite.  
+This simple solution naturally evolves into a scalable and resilient distributed system with services asynchronously communicating via messaging middleware.  
 
 ## Summary
 
