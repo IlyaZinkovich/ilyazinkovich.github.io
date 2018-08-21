@@ -101,7 +101,10 @@ The following code retrieves comments and authors data for each comment with jus
 
 As you may notice, our modular mapping is highly optimized for writes, but reads might lead to higher complexity.
 Sometimes it's just not enough to have one model for both reads and writes. Writes are supposed to operate as little data as possible in the simplest possible way. Reads are completely different. They aggregate data from multiple sources and provide advanced querying capabilities such as filtering, pattern matching, pagination. 
-The solution is to create a separate model that fits domain use cases for reads ([CQRS](https://martinfowler.com/bliki/CQRS.html)). It might be as simple as just providing a set of objects that query the database using raw SQL or as complex as synchronizing our data with a full-text search engine. I remember one project on which we needed to provide full-text search capabilities for the data stored in the Oracle database. We decided to use Hibernate Search on top of traditional JPA mapping. Today I would seriously consider having a separate model.
+The solution is to create a separate model that fits domain use cases for reads ([CQRS](https://martinfowler.com/bliki/CQRS.html)). It might be as simple as just providing a set of objects that query the database using raw SQL or as complex as synchronizing our data with a full-text search engine.  
+On a large scale in our example it might be worth creating a read model inside `comments` module that asynchronously gets comments-related data about colleagues such as their names and avatars in a form of events and combines this data with comments.
+
+![alt text](https://bit.ly/2La204p?style=centered "comments read model")
 
 ## Cross-Module Requirements
 
