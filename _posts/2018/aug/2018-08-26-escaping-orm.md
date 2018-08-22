@@ -114,9 +114,10 @@ Traditionally we'd implement this requirement creating a dependency between tick
 
 {% gist 57769914c84d228e407e39002ac4cd16 %}
 
-Imagine how this code grows when we introduce new effects of ticket status update. Each effect adds complexity and requires the client to think about potential failures in effect functionality. Do we need to revert the ticket status update if the remaining time cannot be updated right now? The whole time management functionality can be offline, and the client won't even see the wrong remaining time. We can accept updating the remaining time in the background. But how to achieve it?
+Imagine how this code grows when we introduce new effects of ticket status update. Each effect adds complexity and requires the client to think about potential failures in effect functionality. Do we need to revert the ticket status update if the remaining time cannot be updated right now? 
 
-With the modular design, we can implement the publish-subscribe mechanism.
+The whole time management functionality can be offline, and the client won't even see the inconsistency in a system. We can accept updating the remaining time in the background. But how to achieve it?  
+With the modular design, we can leverage the publish-subscribe mechanism.
 
 ![alt text](https://bit.ly/2PkOjmm?style=centered "publish-subscribe")
 
