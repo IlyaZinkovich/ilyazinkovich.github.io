@@ -1,6 +1,6 @@
 ---
 layout: post
-date: 2018-08-26
+date: 2018-08-22
 title: "Escaping the ORM-Imposed Coupling"
 description: |
 keywords:
