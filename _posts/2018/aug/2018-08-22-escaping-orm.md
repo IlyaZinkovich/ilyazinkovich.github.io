@@ -1,7 +1,7 @@
 ---
 layout: post
 date: 2018-08-22
-title: "Escaping the ORM-Imposed Coupling"
+title: "Escaping the ORM-Caused Coupling"
 description: |
 keywords:
   - orm
