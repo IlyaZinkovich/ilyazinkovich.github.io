@@ -9,6 +9,7 @@ keywords:
   - distributed systems
 categories: distributed systems
 urlimage: 
+published: false
 ---
 
 Asynchronous Communication with Legacy System
