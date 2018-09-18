@@ -19,6 +19,8 @@ exclude:
   - Gemfile
   - Rakefile
   - LICENSE.txt
+kramdown:
+  auto_ids: true
 
 plugins:
   - jekyll-feed
