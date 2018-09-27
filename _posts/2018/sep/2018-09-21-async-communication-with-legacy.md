@@ -9,7 +9,7 @@ keywords:
   - distributed systems
 categories: distributed systems
 urlimage: 
-published: false
+published: true
 ---
 
 Implementing anything inside a legacy codebase can be painful. 
