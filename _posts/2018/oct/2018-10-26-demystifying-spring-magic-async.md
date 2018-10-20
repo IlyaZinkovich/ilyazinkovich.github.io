@@ -39,7 +39,7 @@ We'll figure it out neither at compile time nor at the application startup. Inst
 
 **What if the async method throws an uncaught exception?**  
 
-Client object won't see this exception because it will be thrown in a different thread. Spring cares about us providing an [AsyncUncaughtExceptionHandler](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/aop/interceptor/AsyncUncaughtExceptionHandler.html) hack to handle these unforunate exceptions.  
+Client object won't see this exception because it will be thrown in a different thread. But Spring cares about us providing an [AsyncUncaughtExceptionHandler](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/aop/interceptor/AsyncUncaughtExceptionHandler.html) hack to handle these unforunate exceptions.  
 
 {% gist df4ac8cd52cba762b017144424b81c2b %}
 
@@ -55,7 +55,10 @@ We can solve it only by wrapping the return value in the [Future](https://docs.o
 
 {% gist c1037cb2730292f17c350a13053c48e4 %}
 
-Unfortunately, Spring doesn't provide any alternative.  
+Unfortunately, this is the best we can get with @Async.  
+Hopefully, there is a better alternative.  
+
+## CompletableFuture
 
 ## Here is a quick summary why @Async is dangerous:
 1. Unsafe to use with a default executor.
