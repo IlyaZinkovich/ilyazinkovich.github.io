@@ -39,7 +39,8 @@ We'll figure it out neither at compile time nor at the application startup. Inst
 
 **What if we annotate private method with @Async?**  
 
-Private methods will be executed synchronously without any warning due to the limitations of Spring AOP.
+By default, private methods will be executed synchronously without any warning due to the limitations of Spring AOP.
+The only way to overcome this limitation is by turning on compile-time weaving.  
 
 **What if the async method throws an uncaught exception?**  
 
