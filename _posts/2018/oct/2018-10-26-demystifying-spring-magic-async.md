@@ -1,6 +1,6 @@
 ---
 layout: post
-date: 2018-10-26
+date: 2018-10-20
 title: "Demystifying the Magic of Spring: @Async"
 description: |
 keywords:
@@ -9,10 +9,10 @@ keywords:
   - refactoring
 categories: refactoring
 urlimage: 
-published: false
+published: true
 ---
 
-Spring Framework is widely known for its magic. It’s a holy grail for junior Java developers, pride for some seniors and shame for the others. Spring combines old hacks that once made Java the privileged language of enterprise software development. However, most of these hacks are no longer needed and only make things worse.  
+Spring Framework is widely known for its magic. It’s a holy grail for junior Java developers, pride for some seniors and shame for the others. Spring combines old hacks that once made Java the privileged language of enterprise software development. However, most of these hacks are no longer needed and only lead to unmaintainable code.  
 One of these hacks is the [@Async](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/annotation/Async.html) annotation that makes methods asynchronous under the hood.  
 Let's discuss the problems with @Async and explore the modern alternative way to do asynchronous computations in Java.
 
@@ -37,6 +37,10 @@ Now we're in better control of resources allocated to async computations in our 
 **What if somebody accidentally changes the name of the executor bean or makes a mistake in the @Async argument value?**  
 We'll figure it out neither at compile time nor at the application startup. Instead, we'll get a [NoSuchBeanDefinitionException](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/beans/factory/NoSuchBeanDefinitionException.html) just when we call the async method for the first time. Hopefully, we have integration tests that will catch this problem. But in practice, the async effect is often disabled in favor of easier and more predictable testing, or Spring configuration for testing differs too much from the production one.
 
+**What if we annotate private method with @Async?**  
+
+Private methods will be executed synchronously without any warning due to the limitations of Spring AOP.
+
 **What if the async method throws an uncaught exception?**  
 
 Client object won't see this exception because it will be thrown in a different thread. But Spring cares about us providing an [AsyncUncaughtExceptionHandler](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/aop/interceptor/AsyncUncaughtExceptionHandler.html) hack to handle these unforunate exceptions.  
@@ -56,13 +60,30 @@ We can solve it only by wrapping the return value in the [Future](https://docs.o
 {% gist c1037cb2730292f17c350a13053c48e4 %}
 
 Unfortunately, this is the best we can get with @Async.  
-Hopefully, there is a better alternative.  
+Combining it with the poor testing support that requires Spring context initialization and configuration juggling, we get maintenance problems resulting in unpredictable behavior in production.
+Hopefully, there is a solution.  
 
-## CompletableFuture
+## Modern Approach to Async Computations in Java
 
-## Here is a quick summary why @Async is dangerous:
-1. Unsafe to use with a default executor.
-2. Late configuration problem detection.
-3. Poor exception handling.
-4. Doesn't work with private methods.
-5. Testing requires initializing Spring context and Spring-specific testing tools.
+@Async annotation was introduced in Spring 3.0. It was December 2009, Java 6 era with a completely broken Future abstraction.  
+5 years later Java 8 released with a game-changing [CompletableFuture](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html) API.  
+CompletableFuture abstracts a composable asynchronous computation. Let's use it in our example.
+
+{% gist 6b27b9a628ea0388526784c167a6ccb0 %}
+
+You see, there is no magic.  
+AsyncObject is a regular Java object with a mandatory explicit dependency on the executor defined in the constructor. Each method has predictable behavior, there are multiple ways to compose them, and exception handling is intuitive.  
+
+But what about testing?  
+
+{% gist a60561420b57bf68c925f39056a9e0f2 %}
+
+Yes, it's a simple and fast unit test we all missed so much after using Spring for a long time.  
+
+After all, it's no longer a question of whether to use @Async or CompletableFuture.  
+Learn more about CompletableFuture and enjoy programming in Java.
+
+**Resources:**
+- I've built a GitHub project for you to experiment with both implementations: [https://github.com/IlyaZinkovich/spring-async-problems](https://github.com/IlyaZinkovich/spring-async-problems).
+- [Guide to CompletableFuture](https://www.baeldung.com/java-completablefuture)
+- [How to do @Async in Spring](https://www.baeldung.com/spring-async)
