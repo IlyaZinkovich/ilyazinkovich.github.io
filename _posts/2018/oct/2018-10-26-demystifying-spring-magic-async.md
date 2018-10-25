@@ -81,14 +81,14 @@ But what about testing?
 
 Yes, it's a simple and fast unit test we all missed so much after using Spring for a long time.  
 
-Finally, if you're **migrating to a reactive web framework** such as [Spring WebFlux](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html), CompletableFuture is a step in the right direction. You can easily create [Mono&lt;T&gt;](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html) from CompletableFuture&lt;T&gt; and [Flux&lt;T&gt;](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html) from CompletableFuture<Iterable&lt;T&gt;>.  
+Finally, if you're **migrating to a reactive web framework** such as [Spring WebFlux](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html) with [Reactor](https://projectreactor.io/), CompletableFuture is a step in the right direction. You can construct [Mono&lt;T&gt;](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html) from CompletableFuture&lt;T&gt; wrapping it into Supplier&lt;T&gt; to achieve inherent laziness of reactive streams that is missing in CompletableFuture.  
 
 {% gist 4b585846e7b29c3dbd2b4fdfdef7571f %}
 
-Although [Project Reactor](https://projectreactor.io/) is relatively new, a bunch of Java libraries already expose fully asynchronous CompletableFuture API. You can easily embed them into your reactive app without problems.
+Although Project Reactor is relatively new, a bunch of Java libraries already expose fully asynchronous CompletableFuture API. You can easily embed them into your reactive app without problems.
 
-After all, it's no longer a question of whether to use @Async or CompletableFuture.  
-Learn more about CompletableFuture and enjoy programming in Java.
+After all, it's no longer a question of whether to use @Async or not.  
+Learn more about CompletableFuture and enjoy asynchronous programming in Java.
 
 **Resources:**
 - I've built a GitHub project for you to experiment with both implementations: [https://github.com/IlyaZinkovich/spring-async-problems](https://github.com/IlyaZinkovich/spring-async-problems).
