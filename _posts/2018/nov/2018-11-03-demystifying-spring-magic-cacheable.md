@@ -54,6 +54,11 @@ Caching the remote service response with an input string as a cache key will loo
 
 {% gist fee149f488b4a133d9d063cf3cc76d4d %}
 
-Let's cover a more complicated case - add caching for methods returning Mono. 
-@Cacheable doesn't work for Mono, because we don't really want to cache the Mono instance, instead we want to cache the async result.
-@Cacheable semantics do not match the Mono use case. Using interfaces we can define semantics ourselves.
+What if our remote service returns Mono&lt;String&gt; and we want to cache it in Redis?
+
+Let's cover a more complicated case - cache results of a method returning Mono in Redis. 
+Mono encapsulates lazy asyncronous computation of 0..1 results. If you subscribe to the same Mono twice, then the computation will run twice too. Therefore, there is no sense to cache Mono instances with @Cacheable. Instead, we'd like to cache the results of the computations encapsulated in Mono. Using interfaces we can define these caching semantics ourselves. 
+
+Full implementation using [Lettuce](https://lettuce.io) reactive client for Redis will look as follows:
+
+{% gist 14f5eae0c2fbcab7501e6dd916fde7d9 %}
