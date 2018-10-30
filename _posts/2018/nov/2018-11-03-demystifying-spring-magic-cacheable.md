@@ -20,27 +20,15 @@ If you're migrating to a reactive web framework such as [Spring WebFlux](https:/
 
 ## What's wrong with @Cacheable?
 
-@Cacheable is another little thing we got used to while building Spring applications. 
-If we want to cache a result of the method invocation we just annotate this method with @Cacheable and Spring will do the rest for us.
-
-This approach sounds like a good idea up until you start working on a huge codebase.
-You need to remember a couple of tricks to be confident that you don't break the app:
+@Cacheable is another little thing we got used to while building Spring-based apps. If we want to cache a result of the method invocation we just annotate this method with @Cacheable and Spring will do the rest for us.  
+This approach sounds like a good idea until you start working on a huge codebase.  
+The main problem is the same as with @Async - it's just too easy to make a mistake leaving it unnoticable until it's too late.  
+You need to remember a couple of tricks to be more or less confident when you use @Cacheable:  
 1. Every class you annotate with @Cacheable must be declared as a bean.  
-2. Caching works only for public methods by default (have a good time with compile-time weaving for non-public methods).  
-3. All parameters that you specify in the @Cacheable annotation will only be checked at runtime when the target method is called. If you accidentally changed the cache name you will get IllegalArgumentException when you call the method. You can use ugly Spring Expression Language (SpEL) to specify keys for cache entries, conditions for caching based on method parameters and return value. Compiler doesn't have a clue about SpEL. That's why it's so simple to make a mistake in one of these expressions.
-4. Testing requires bootstrapping of Spring application context and Spring-specific test tools (autowiring beans into the test object, @MockBean, @SpyBean).
-5. @Cacheable doesn't work for CompletableFuture or Mono/Flux.
-
-Don't forget basic things such as making beans for all the classes that require Spring caching.
-And keep in mind that Spring caching doesn't work by default for non-public methods.
-
-@Cacheable is unpredictable. 
-What does it mean to cache CompletableFuture or Mono/Flux?
-What if we decide to use @Cacheable for generic class?
-
-Doesn't work: [StackOverfow Question](https://stackoverflow.com/questions/36977643/spring-cache-not-working-for-abstract-classes)
-Simply put [@Cacheable cannot cache Mono and Flux types](https://stackoverflow.com/questions/48156424/spring-webflux-and-cacheable-proper-way-of-caching-result-of-mono-flux-type)
-If you're using caching technology like Redis or Memcached, @Cacheable will block your main thread.
+2. Caching works only for public methods by default (compile-time weaving required for non-public methods).  
+3. All parameters that you specify in the @Cacheable annotation will only be checked at runtime when the target method is called. If you accidentally changed the cache name you will get IllegalArgumentException when you call the method. You can use ugly Spring Expression Language (SpEL) to specify keys for cache entries and conditions for caching based on method parameters and return value. Compiler doesn't have a clue about SpEL. Each mistake in a SpEL expression will result in a runtime exception.  
+4. Testing requires the bootstrapping of Spring application context and Spring-specific test tools (autowiring beans into the test object, @MockBean, @SpyBean).  
+5. @Cacheable doesn't work for Mono and Flux.  
 
 ## Pure Java Alternative to @Cacheable
 
