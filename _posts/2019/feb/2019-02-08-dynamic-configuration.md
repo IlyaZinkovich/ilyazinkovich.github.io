@@ -1,7 +1,7 @@
 ---
 layout: post
 date: 2019-02-08
-title: Separating Dynamic Configuration from Business Logic
+title: Isolating Business Logic from Dynamic Configuration
 description: |
 keywords:
   - modular design
@@ -20,7 +20,7 @@ These techniques require some sort of dynamic configuration of our applications.
 
 ## Common Approach to Dynamic Configuration
 
-[Feature Toggles](https://martinfowler.com/articles/feature-toggles.html) in some form or another are widely used to configure the applications dynamically. Here is an example of **how** they're used.
+[Feature Toggles](https://martinfowler.com/articles/feature-toggles.html) are widely used to configure the applications dynamically. Here is an example of **how** they're used.
 
 Let's say we're developing a car-sharing service and need to get cars nearby client location filtered according to his preferences. We have a couple of filters:
 - **prodFilter** that filters cars according to the last stable version of a filter;  
@@ -29,7 +29,7 @@ Let's say we're developing a car-sharing service and need to get cars nearby cli
 
 {% gist e29341606c2106bb4871bc6bdf938794 %}
 
-We're used to this kind of code style. It's easy to write until you cannot recognize which code path is active right now and what's the business logic of the code hidden behind these nested if-else statements that appear throughout the whole codebase. Ideally, this situation should never happen because we all agree that the toggles are temporary and should be removed as soon as the switching is finished. But as practice shows, stale toggles remain with the codebase much longer than we expect. This is especially true for the A/B test toggles that last at least for the period of A/B test which might be long.
+We're used to this kind of code style. It's easy to write until you cannot recognize what's the business logic of the code hidden behind these nested if-else statements that appear throughout the whole codebase. Ideally, this situation should never happen because we all agree that the toggles are temporary and should be removed as soon as the switching is finished. But as practice shows, stale toggles remain with the codebase much longer than we expect. This is especially true for the A/B test toggles that last at least for the period of A/B test which might be long.
 
 Using the feature toggles among business logic ties us closer to the library of choice. Changing it becomes risky.  
 Think of a way to unit-test this code. The mechanism of enabling and disabling the toggles is usually completely hidden from us. Each unit test should then use some hacks to switch the toggles. Although these hacks are sometimes provided by the library, they tie us even harder to unnecessary implementation details.
@@ -53,9 +53,8 @@ Since the domain code no longer depends on the configuration, this approach has 
 - all configuration is in one place outside of the business logic, which gives us a better view on the way our application is configured and clear actionable feedback if the number of configurations grows too much;
 - we can easily change the approach to dynamic configuration without a huge risk of breaking the domain code;
 
+The ultimate goal of this technique is to refine the domain model and make it independent of the infrastructure. Practically, it means that dependency flow points inwards from infrastructure code to domain. 
+
 ![alt text](http://bit.ly/2DbxnJI?style=centered "diagram")
 
-If you constantly apply this technique, you can find yourself building more modular system that can be composed in multiple ways based on the cutomer needs. It encourages creation of smaller modules with clearly defined interfaces that can be switched on and off, optimised and rewritten.
-
-This assumption might be wrong for other reasons.
-Have you been in a situation when as a result of A/B test business decides to have both versions (A and B) but that should be applied to different user groups dynamically?
+In this guide we explored how we can isolate the domain code from the dynamic cofiguration. But we can apply the same technique for other infrastructural aspects of our applications. Hope to cover them in the future articles, stay tuned!
