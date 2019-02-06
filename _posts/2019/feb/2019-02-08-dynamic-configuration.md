@@ -1,6 +1,6 @@
 ---
 layout: post
-date: 2019-02-08
+date: 2019-02-06
 title: Isolating Business Logic from Dynamic Configuration
 description: |
 keywords:
@@ -8,13 +8,14 @@ keywords:
   - configuration
 categories: modular design
 urlimage: 
-published: false
+published: true
 ---
 
 Modern businesses demand higher flexibility of our applications.  
-Emerging data-driven approaches to product development encourage A/B testing to gradually improve product market fit.  
-Continuous Delivery popularises decoupling of feature releases from deployment cycle.  
-These techniques require some sort of dynamic configuration of our applications. Poorly implemented, the dynamic configuration makes the code fragile. Being not able to change the software frequently we loose all the benefits of delivering continuously and being data-driven. In this article I'm presenting an approach to control the dynamic configuration.
+Emerging data-driven approaches to product development encourage A/B testing to improve product-market fit gradually.  
+Continuous Delivery popularises decoupling of feature releases from the deployment cycle.  
+All these techniques require some sort of dynamic configuration. Poorly implemented, the dynamic configuration makes the code fragile. Being not able to change the software frequently we lose all the benefits of delivering continuously and being data-driven.  
+However, we can mitigate these issues if we stop mixing configuration code with business logic.  
 
 <!--more-->
 
@@ -49,12 +50,12 @@ Next, we extract the switching logic to the place where the Cars object is creat
 {% gist ccccd9ab6b10ad422e53151902e7898c %}
 
 Since the domain code no longer depends on the configuration, this approach has multiple benefits:
-- business logic can be easily tested separately from the configuration code and requires no mocking whatsoever;
-- all configuration is in one place outside of the business logic, which gives us a better view on the way our application is configured and clear actionable feedback if the number of configurations grows too much;
-- we can easily change the approach to dynamic configuration without a huge risk of breaking the domain code;
+- business logic can be easily tested separately from the configuration code and requires no mocking whatsoever;  
+- all configuration is now in one place (outside of the business logic) which gives us a better view on the way our application is configured and actionable feedback if the number of configurations grows too much.
+- we can change the approach to the dynamic configuration without a risk of breaking the domain code;
 
-The ultimate goal of this technique is to refine the domain model and make it independent of the infrastructure. Practically, it means that dependency flow points inwards from infrastructure code to domain. 
+The ultimate goal of this technique is to clean up the domain modelling code and make it independent of the infrastructure. Practically, it means that dependency flow points inwards from infrastructure code to domain. 
 
 ![alt text](http://bit.ly/2DbxnJI?style=centered "diagram")
 
-In this guide we explored how we can isolate the domain code from the dynamic cofiguration. But we can apply the same technique for other infrastructural aspects of our applications. Hope to cover them in the future articles, stay tuned!
+In this guide, we explored how we can isolate the domain code from the dynamic configuration. In fact, we can apply the same technique for other infrastructural aspects of our applications. Hope to cover them in the future articles, stay tuned!
