@@ -4,7 +4,7 @@ My blog about software engineering.
 
 ## License
 
-Copyright (c) 2017 Ilya Zinkovich
+Copyright (c) 2017-2019 Ilya Zinkovich
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the 'Software'), to deal
