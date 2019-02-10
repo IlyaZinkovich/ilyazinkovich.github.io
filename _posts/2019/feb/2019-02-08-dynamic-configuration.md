@@ -26,18 +26,28 @@ However, we can mitigate these issues if we stop mixing configuration code with 
 Let's say we're developing a car-sharing service and need to get cars nearby client location filtered according to his preferences. We have a couple of filters:
 - **prodFilter** that filters cars according to the last stable version of a filter;  
 - **candidateFilter** that was developed today and should be switched on and off with a feature toggle and finally replace the prodFilter;  
-- **awesomeFilter** which is an experimental filter that targets a specific client group according to A/B test configuration based on the client id.
+- **awesomeFilter** which is an experimental filter that targets a specific client group according to A/B test configuration based on the client id.  
+
+Additionally, somebody who integrated Prometheus into our service added a counter that's incremented if no cars are presented to the clients and hid this change behind a toggle as well.    
 
 {% gist e29341606c2106bb4871bc6bdf938794 %}
 
-We're used to this kind of code style. It's easy to write until you cannot recognize what's the business logic of the code hidden behind these nested if-else statements that appear throughout the whole codebase. Ideally, this situation should never happen because we all agree that the toggles are temporary and should be removed as soon as the switching is finished. But as practice shows, stale toggles remain with the codebase much longer than we expect. This is especially true for the A/B test toggles that last at least for the period of A/B test which might be long.
+We're used to this kind of code style. It's easy to write until you cannot recognize what's the business logic of the code hidden behind these nested if-else statements that appear throughout the whole codebase.
+Ideally, this situation should never happen because we all agree that the toggles are temporary and should be removed as soon as the switching is finished. But as practice shows, stale toggles remain with the codebase much longer than we expect. This is especially true for the A/B test toggles that last at least for the period of A/B test which might be long.  
 
-Using the feature toggles among business logic ties us closer to the library of choice. Changing it becomes risky.  
-Think of a way to unit-test this code. The mechanism of enabling and disabling the toggles is usually completely hidden from us. Each unit test should then use some hacks to switch the toggles. Although these hacks are sometimes provided by the library, they tie us even harder to unnecessary implementation details.
+The domain class knows about the ongoing A/B testing process, the rollout of the new functionality and half-ready Prometheus integration. Should anyone who tries to understand and change "the logic of presenting the personalized set of cars" know about all this stuff?  
 
-If you're trying to build a reactive service, you might also be interested in other implementation details of the feature toggle library. For instance, a pretty common [togglz](https://www.togglz.org/) library allows getting the feature state from RBDMS storage. It provides a [JDBCStateRepository](https://github.com/togglz/togglz/blob/master/core/src/main/java/org/togglz/core/repository/jdbc/JDBCStateRepository.java) that uses blocking jdbc driver and makes a call to the database each time we want to know the feature state. It's not convenient enough, that's why the library provides [CachingStateRepository](https://github.com/togglz/togglz/blob/master/core/src/main/java/org/togglz/core/repository/cache/CachingStateRepository.java) that allows you to wrap JDBCStateRepository and make blocking calls only when the cache entry for the feature state expires or doesn't exist, which leads to random thread pool exhaustion at runtime.
+Look a the last if statement.  
 
-Can we do better than this? Yes, for sure.
+{% gist 4ead32f96cef2faf826474133c078134 %}
+
+The mix of the toggle and business conditions blurs the boundaries between the infrastructure and domain code. After Prometheus integration is complete, you need to be careful about removing all the toggles in a way that the business logic remains the same. The risk of messing it up grows with the amount and complexity of the code coupled to the toggle.  
+
+Think of a way to unit-test this code. The mechanism of enabling and disabling the toggles is usually completely hidden from us. Each unit test should then use some hacks to switch the toggles. Although these hacks are sometimes provided by the library, they tie us even harder to unnecessary implementation details. Anyway, each test method will contain the magic combination of enabling and disabling of all the toggles that are used in a target class.  
+
+{% gist 41e3bb5b6a3a5d44e1165c597c73609d %}
+
+Can we do better than this?  
 
 ## Extracting Configuration from Business Logic
 
@@ -50,9 +60,9 @@ Next, we extract the switching logic to the place where the Cars object is creat
 {% gist ccccd9ab6b10ad422e53151902e7898c %}
 
 Since the domain code no longer depends on the configuration, this approach has multiple benefits:
-- business logic can be easily tested separately from the configuration code and requires no mocking whatsoever;  
-- all configuration is now in one place (outside of the business logic) which gives us a better view on the way our application is configured and actionable feedback if the number of configurations grows too much.
-- we can change the approach to the dynamic configuration without a risk of breaking the domain code;
+- business logic becomes crystal clear and free from infrastructure concerns;
+- we can test the domain code separately from the configuration code without any mocking and toggle enabling/disabling boilerplate;  
+- all configuration is now in one place (outside of the business logic) which gives us a better view on the way our application is configured, easy toggle removing procedure and actionable feedback if the number of configurations grows too much.  
 
 The ultimate goal of this technique is to clean up the domain modelling code and make it independent of the infrastructure. Practically, it means that dependency flow points inwards from infrastructure code to domain. 
 
