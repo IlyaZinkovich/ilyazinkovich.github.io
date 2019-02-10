@@ -35,8 +35,6 @@ Additionally, somebody who integrated Prometheus into our service added a counte
 We're used to this kind of code style. It's easy to write until you cannot recognize what's the business logic of the code hidden behind these nested if-else statements that appear throughout the whole codebase.
 Ideally, this situation should never happen because we all agree that the toggles are temporary and should be removed as soon as the switching is finished. But as practice shows, stale toggles remain with the codebase much longer than we expect. This is especially true for the A/B test toggles that last at least for the period of A/B test which might be long.  
 
-The domain class knows about the ongoing A/B testing process, the rollout of the new functionality and half-ready Prometheus integration. Should anyone who tries to understand and change "the logic of presenting the personalized set of cars" know about all this stuff?  
-
 Look a the last if statement.  
 
 {% gist 4ead32f96cef2faf826474133c078134 %}
@@ -47,11 +45,13 @@ Think of a way to unit-test this code. The mechanism of enabling and disabling t
 
 {% gist 41e3bb5b6a3a5d44e1165c597c73609d %}
 
-Can we do better than this?  
+After all, the Cars class contains information about the ongoing A/B testing process, the rollout of the new functionality and half-ready Prometheus integration. Should any one of us who tries hard to understand "the logic of presenting the personalized set of cars" know and care about all this stuff?  
+I hope we shouldn't, and we can help ourselves by applying a simple technique.  
 
-## Done Right
+## Decoupling from Dynamic Configuration
 
-The first step is to define an interface for switchable components. In our case, we just need to extract the filtering function. If a switchable part contains multiple statements, we can encapsulate it in an object or a function that implements the interface.  
+The first step is to define an interface for switchable components.  
+In our case, we need to extract the filtering function and domain-specific counter increment. If a switchable part contains multiple statements, we can encapsulate it in an object or a function that implements this interface.  
 
 {% gist 8f95e2f41c0af1afefd9fce6eb530d79 %}
 
