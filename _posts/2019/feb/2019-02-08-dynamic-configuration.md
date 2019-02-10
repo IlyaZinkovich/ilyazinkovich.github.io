@@ -45,7 +45,7 @@ Think of a way to unit-test this code. The mechanism of enabling and disabling t
 
 {% gist 41e3bb5b6a3a5d44e1165c597c73609d %}
 
-After all, the Cars class contains information about the ongoing A/B testing process, the rollout of the new functionality and half-ready Prometheus integration. Should any one of us who tries hard to understand "the logic of presenting the personalized set of cars" know and care about all this stuff?  
+After all, the Cars class contains information about the ongoing A/B testing process, the rollout of the new functionality and half-ready Prometheus integration. Should any one of us who tries to understand "the logic of presenting the personalized set of cars" know and care about all this stuff?  
 I hope we shouldn't, and we can help ourselves by applying a simple technique.  
 
 ## Decoupling from Dynamic Configuration
