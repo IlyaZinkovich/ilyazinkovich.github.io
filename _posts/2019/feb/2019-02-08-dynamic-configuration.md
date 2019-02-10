@@ -1,7 +1,7 @@
 ---
 layout: post
 date: 2019-02-06
-title: Isolating Business Logic from Dynamic Configuration
+title: Dynamic Configuration Done Right
 description: |
 keywords:
   - modular design
@@ -49,7 +49,7 @@ Think of a way to unit-test this code. The mechanism of enabling and disabling t
 
 Can we do better than this?  
 
-## Extracting Configuration from Business Logic
+## Done Right
 
 The first step is to define an interface for switchable components. In our case, we just need to extract the filtering function. If a switchable part contains multiple statements, we can encapsulate it in an object or a function that implements the interface.  
 
