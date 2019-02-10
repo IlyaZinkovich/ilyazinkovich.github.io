@@ -28,7 +28,7 @@ Let's say we're developing a car-sharing service and need to get cars nearby cli
 - **candidateFilter** that was developed today and should be switched on and off with a feature toggle and finally replace the prodFilter;  
 - **awesomeFilter** which is an experimental filter that targets a specific client group according to A/B test configuration based on the client id.  
 
-Additionally, somebody who integrated Prometheus into our service added a counter that's incremented if no cars are presented to the clients and hid this change behind a toggle as well.    
+Additionally, somebody who integrated Prometheus into our service added a counter that's incremented if no cars are presented.    
 
 {% gist e29341606c2106bb4871bc6bdf938794 %}
 
@@ -59,13 +59,13 @@ Next, we extract the switching logic to the place where the Cars object is creat
 
 {% gist ccccd9ab6b10ad422e53151902e7898c %}
 
+Each component of a system (each concrete implementation of a filter, counter and Cars class itself) can now be tested in isolation. But if you're curious about how to test Cars with a concrete filter or counter as we did previously, you can check out the following code.  
+
+{% gist a522dd00740aa402d1267cf5fea537e3 %}
+
 Since the domain code no longer depends on the configuration, this approach has multiple benefits:
 - business logic becomes crystal clear and free from infrastructure concerns;
 - we can test the domain code separately from the configuration code without any mocking and toggle enabling/disabling boilerplate;  
 - all configuration is now in one place (outside of the business logic) which gives us a better view on the way our application is configured, easy toggle removing procedure and actionable feedback if the number of configurations grows too much.  
 
-The ultimate goal of this technique is to clean up the domain modelling code and make it independent of the infrastructure. Practically, it means that dependency flow points inwards from infrastructure code to domain. 
-
-![alt text](http://bit.ly/2DbxnJI?style=centered "diagram")
-
-In this guide, we explored how we can isolate the domain code from the dynamic configuration. In fact, we can apply the same technique for other infrastructural aspects of our applications. Hope to cover them in the future articles, stay tuned!
+With all these benefits at hand, we can finally build flexible applications without sacrificing quality. That's one small step for a programmer, one giant leap towards maintainable data-driven continuously delivered products.  
