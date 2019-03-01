@@ -28,7 +28,7 @@ Let's say we're developing a car-sharing service and need to get cars nearby cli
 - **candidateFilter** that was developed today and should be switched on and off with a feature toggle and finally replace the prodFilter;  
 - **awesomeFilter** which is an experimental filter that targets a specific client group according to A/B test configuration based on the client id.  
 
-Additionally, somebody who integrated Prometheus into our service added a counter that's incremented if no cars are presented.    
+Additionally, somebody who integrated Prometheus into our service added a counter that's incremented if no cars are presented to the client.    
 
 {% gist e29341606c2106bb4871bc6bdf938794 %}
 
