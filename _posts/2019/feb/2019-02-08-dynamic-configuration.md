@@ -68,4 +68,4 @@ Since the domain code no longer depends on the configuration, this approach has 
 - we can test the domain code separately from the configuration code without any mocking and toggle enabling/disabling boilerplate;  
 - all configuration is now in one place (outside of the business logic) which gives us a better view on the way our application is configured, easy toggle removing procedure and actionable feedback if the number of configurations grows too much.  
 
-With all these benefits at hand, we can finally build flexible applications without sacrificing quality. That's one small step for a programmer, one giant leap towards maintainable data-driven continuously delivered products.  
+With all these benefits at hand, we can finally build flexible applications without sacrificing quality. This small step brings us closer towards maintainable data-driven continuously delivered software. And it's our choice to make it or not.  
