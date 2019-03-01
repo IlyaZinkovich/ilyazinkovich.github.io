@@ -32,7 +32,7 @@ Additionally, somebody who integrated Prometheus into our service added a counte
 
 {% gist e29341606c2106bb4871bc6bdf938794 %}
 
-We're used to this kind of code style. It's easy to write until you cannot recognize what's the business logic of the code hidden behind these nested if-else statements that appear throughout the whole codebase.
+We're used to this kind of code style. It's easy to write until the point when you cannot recognize what's the business logic of the code hidden behind these nested if-else statements that appear throughout the whole codebase.
 Ideally, this situation should never happen because we all agree that the toggles are temporary and should be removed as soon as the switching is finished. But as practice shows, stale toggles remain with the codebase much longer than we expect. This is especially true for the A/B test toggles that last at least for the period of A/B test which might be too long.  
 
 Look a the last if statement.  
