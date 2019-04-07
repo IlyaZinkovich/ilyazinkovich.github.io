@@ -18,7 +18,7 @@ Caching is important to build efficient software. There is a large variety of ex
 >Annotate this method with `@Cacheable` and Spring will do the rest."  
 >Every Spring Tutorial Author, all the time.  
 
-But when it comes to a slightly non-trivial caching problem or when the application is heavily refactored, Spring force is leaving you and everything breaks apart. Let's see why it happens and what are the alternatives.  
+But when it comes to a slightly non-trivial caching problem or when the application is being heavily refactored, Spring force is leaving you and everything breaks apart. Let's see why it happens and what are the alternatives.  
 
 <!--more-->
 
@@ -31,8 +31,6 @@ We'll explore and challenge Spring caching while implementing a very primitive w
 Let's test the caching mechanism with a simple `ConcurrentMap` in-memory cache to verify that responses are actually being cached per a combination of a request method and URL.  
 
 For the purpose of testing, we'll use `HttpClient` implementation that returns a response containing a randomly generated string.  
-
-{% gist 318617d61c0b1fe4cbb21f985ec663fe %}
 
 Here is the config.  
 
