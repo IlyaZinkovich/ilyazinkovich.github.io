@@ -16,7 +16,7 @@ Caching is important to build efficient software. There is a large variety of ex
 
 >"Want to cache a result of the method invocation?  
 >Annotate this method with `@Cacheable` and Spring will do the rest."  
->Every Spring Tutorial Author, all the time.  
+>Every Spring Tutorial Author.  
 
 But when it comes to a slightly non-trivial caching problem or when the application is being heavily refactored, Spring force is leaving you and everything breaks apart. Let's see why it happens and what are the alternatives.  
 
