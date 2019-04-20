@@ -25,5 +25,6 @@ If you ever tried to debug these libraries when they unexpectedly stop to work o
 Spring Boot’s famous and pretty much single feature is auto-configuration. For each Spring library (Web, Data, Test and many more) there is a corresponding Spring Boot Starter that auto-configures the library components based on application properties. As a result, you can easily bootstrap your Java web app with just a few lines of code.  
 
 And then a natural idea comes to our mind - let’s use the same extension mechanism for our in-house libraries. 
-Here comes the mess:
-# The library starts to depend on a specific Spring and Spring Boot version which complicates the framework upgrade on the client side. Although the migration guide for Spring libraries is usually available, we usually don’t have this luxury for in-house libraries, especially for the most abandoned ones.
+Here’s what we get:
+1. The library starts to depend on a specific Spring and Spring Boot version which complicates the framework upgrade on the client side. Although the high-quality migration guide for Spring libraries is usually available, we usually don’t have this luxury for the in-house libraries, especially for the most abandoned ones. Even Spring Team itself has this problem - Spring Cloud libraries have a completely different versioning scheme than Spring or Spring Boot, and each library has an independent release cycle. Narrowing all the Spring-based libraries down to the common version of a framework becomes tricky, boring, time-consuming and we hardly ever have full confidence that everything will work at the end. 
+
