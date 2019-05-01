@@ -11,8 +11,8 @@ urlimage:
 published: false
 ---
 
-When the amount of code grows to a certain point or some cross-cutting concern should necessarily be applied to a wide range of services, developers start thinking about the ways to share the code. Although a lot of common infrastructure concerns are gradually extracted into side-car containers, shared libraries are still commonly used to share valuable assets across the whole companies. They are easy to start with and can quickly go bad turning into a silent time-bomb for that exact wide range of services that integrated with it.  
-Let’s discuss how we can develop better libraries that give clients full control over what their services do and do not.  
+When the amount of code grows to a certain point or some cross-cutting concern should necessarily be applied to a wide range of services, developers start thinking about the ways to share the code. Although a lot of common infrastructure concerns are gradually extracted into side-car containers, shared libraries are still commonly used to share valuable assets across the whole company. They are easy to start with and can quickly go bad turning into a silent time-bomb for that exact wide range of services that integrated with it.  
+Let’s discuss how we can develop better libraries that give clients full control over what their integrated services do and do not.  
 
 <!--more-->
 
