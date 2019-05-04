@@ -8,7 +8,7 @@ keywords:
   - spring
   - refactoring
 categories: refactoring
-urlimage: 
+urlimage: http://bit.ly/2ZW2KTq
 published: true
 ---
 
