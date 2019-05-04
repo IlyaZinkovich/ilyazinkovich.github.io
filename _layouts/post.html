@@ -4,29 +4,32 @@ comments: true
 ---
 
 <article itemscope="" itemtype="http://schema.org/BlogPosting">
-  <div itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject">
-    <meta itemprop="url" content="{{ site.url }}/images/tomato.png"/>
-    <meta itemprop="height" content="250"/>
-    <meta itemprop="width" content="250"/>
-  </div>
   <meta itemprop="image" content=""/>
   <div itemscope="" itemprop="author" itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Ilya Zinkovich"/>
   </div>
-  <div itemscope="" itemprop="publisher" itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Ilya Zinkovich"/>
-    <div itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject">
-      <meta itemprop="url" content="{{ site.url }}/images/tomato.png"/>
-      <meta itemprop="height" content="250"/>
-      <meta itemprop="width" content="250"/>
-    </div>
-  </div>
+  <h1 itemprop="name headline mainEntityOfPage">{{ page.title }}</h1>
   <p>
     <span itemprop="datePublished dateModified" datetime="{{ page.date | date_to_xmlschema }}">
       {{ page.date | date: "%B %-d, %Y" }}
     </span>
+    <nav class="buttons notranslate desktop-only share">
+      <a href="https://twitter.com/share?url={{ site.url }}{{ page.url }}&amp;text={{ page.title | cgi_escape }}"
+        title="Share on Twitter" class="button" rel="nofollow">
+        <span class="count count-twitter">0</span>
+        <i class="icon icon-twitter notranslate" aria-hidden="true">
+          <img src="/images/twitter-logo.svg" class="social icon-twitter" alt="" itemprop="image"/>
+        </i>
+      </a>
+      <a href="https://www.linkedin.com/cws/share?url={{ site.url }}{{ page.url }}"
+        title="Share on LinkedIn" class="button" rel="nofollow">
+        <span class="count count-linkedin">0</span>
+        <i class="icon icon-linkedin notranslate" aria-hidden="true">
+          <img src="/images/linkedin-logo.svg" class="social icon-linkedin" alt="" itemprop="image"/>
+        </i>
+      </a>
+    </nav>
   </p>
-  <h1 itemprop="name headline mainEntityOfPage">{{ page.title }}</h1>
   {{ content }}
 </article>
 

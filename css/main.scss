@@ -6,9 +6,19 @@
 
 $black: #000;
 $white: #fff;
-$grey: lighten($black, 50);
-
+$gray: lighten($black, 50);
+$code-font: 'Source Code Pro', monospace;
+$em: 19px;
 %gray { color: lighten($black, 50); }
+
+%unprintable {
+  @media print {
+    display: none !important;
+    visibility: hidden;
+  }
+}
+
+.unprintable { @extend %unprintable; }
 
 .gray { @extend %gray; }
 
@@ -137,11 +147,6 @@ code {
   margin: 4em 0;
 }
 
-.icon {
-  width: 20px;
-  height: 20px;
-}
-
 img[src$="centered"] {
   display:block;
   margin: 20px auto;
@@ -155,4 +160,75 @@ a, a:visited {
 blockquote {
   padding: 0 1em;
   border-left: 0.25em solid #dfe2e5;
+}
+
+.social {
+  width: 20px;
+  height: 20px;
+}
+
+.share {
+  @extend %unprintable;
+  margin-bottom: .5em;
+
+  a,
+  a:visited {
+    text-decoration: none;
+  }
+
+  a {
+    position: relative;
+
+    .count {
+      background-color: $white;
+      border: 1px solid $gray;
+      color: $gray;
+      display: none;
+      font-family: $code-font;
+      font-size: .6 * $em;
+      line-height: .7 * $em;
+      padding: 0 .2 * $em;
+      position: absolute;
+      right: .3 * $em;
+      top: -.7 * $em;
+    }
+
+    .icon {
+      $size: 35px;
+      border: 1px solid $gray;
+      border-radius: 50%;
+      color: $gray;
+      display: inline-block;
+      height: $size;
+      width: $size;
+      margin-right: .2 * $em;
+      padding: 5px;
+      text-align: center;
+      vertical-align: middle;
+
+      &:hover {
+        background-color: $gray;
+        color: $white;
+      }
+    }
+
+    .icon::before {
+      font-size: $em;
+      line-height: 1.2 * $em;
+    }
+
+    .icon-twitter:hover { color: #00aced; }
+    .icon-stackoverflow:hover { color: #f48024; }
+    .icon-github:hover { color: #800080; }
+    .icon-facebook:hover { color: #3b5998; }
+    .icon-linkedin:hover { color: #007bb6; }
+    .icon-instagram:hover { color: #fd1d1d; }
+    .icon-rss:hover { color: #f60; }
+    .icon-reddit:hover { color: #cee3f8; }
+    .icon-pinterest:hover { color: #c92228; }
+    .icon-youtube:hover { color: #e52d27; }
+    .icon-angellist:hover { color: #6694ca; }
+    .icon-gitter:hover { color: #ff006e; }
+    .icon-podcast:hover { color: #f50; }
+  }
 }
