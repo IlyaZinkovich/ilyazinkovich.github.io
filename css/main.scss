@@ -2,8 +2,7 @@
 ---
 @charset 'utf-8';
 // see https://fonts.google.com/
-// @import 'https://fonts.googleapis.com/css?family=Lora';
-@import 'https://fonts.googleapis.com/css2?family=Spectral';
+@import 'https://fonts.googleapis.com/css?family=Lora';
 
 $black: #000;
 $white: #fff;
@@ -35,7 +34,7 @@ $em: 19px;
 }
 
 p, h1, h2, h3, h4, h5, li {
-  font-family: 'Spectral', serif;
+  font-family: 'Lora', serif;
 }
 
 p {
@@ -47,7 +46,7 @@ li {
 }
 
 .link {
-  font-family: 'Spectral', serif;
+  font-family: 'Lora', serif;
   font-size: 18px;
 }
 
@@ -134,7 +133,7 @@ footer {
   @extend %gray;
   @extend %center;
   font-size: .8em;
-  font-family: 'Spectral', serif;
+  font-family: 'Lora', serif;
 }
 
 code {
