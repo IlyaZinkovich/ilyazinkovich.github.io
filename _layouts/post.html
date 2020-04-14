@@ -11,7 +11,7 @@ comments: true
   <h1 itemprop="name headline mainEntityOfPage">{{ page.title }}</h1>
   <p>
     <span itemprop="datePublished dateModified" datetime="{{ page.date | date_to_xmlschema }}">
-      {{ page.date | date: "%B %-d, %Y" }}
+      {{ page.date | date: "%-d %B %Y" }}
     </span>
     <nav class="buttons notranslate desktop-only share">
       <a href="https://twitter.com/share?url={{ site.url }}{{ page.url }}&amp;text={{ page.title | cgi_escape }}"
