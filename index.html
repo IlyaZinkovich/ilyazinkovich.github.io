@@ -10,7 +10,7 @@ keywords:
 {% for post in paginator.posts %}
   <article>
     <h1><a href="{{ post.url | prepend: site.baseurl }}"><span>{{ post.title }}</span></a></h1>
-    <p>{{ post.date | date: "%B %-d, %Y" }}</p>
+    <p>{{ post.date | date: "%-d %B %Y" }}</p>
     {{ post.excerpt }}
     <a class="link" href="{{ post.url | prepend: site.baseurl }}">continue reading...</a>
   </article>
