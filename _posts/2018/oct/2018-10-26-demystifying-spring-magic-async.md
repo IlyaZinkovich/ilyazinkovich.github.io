@@ -12,7 +12,7 @@ urlimage:
 published: true
 ---
 
-Spring Framework is widely known for its magic. It’s a holy grail for junior Java developers, pride for some seniors and shame for the others. Spring combines old hacks that once made Java the privileged language of enterprise software development. However, most of these hacks are no longer needed and only lead to unmaintainable code.  
+Spring Framework is widely known for its magic. It’s a holy grail for junior Java developers, pride for some senior and shame for the others. Spring combines old hacks that once made Java the privileged language of enterprise software development. However, most of these hacks are no longer needed and only lead to unmaintainable code.  
 One of these hacks is the [@Async](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/annotation/Async.html) annotation that makes methods asynchronous under the hood.  
 Let's discuss the problems with @Async and explore the modern alternative way to do asynchronous computations in Java.
 
