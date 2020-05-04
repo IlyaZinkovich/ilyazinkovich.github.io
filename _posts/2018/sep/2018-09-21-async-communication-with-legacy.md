@@ -14,7 +14,7 @@ published: true
 
 Implementing anything inside a legacy codebase can be painful. 
 
->"Legacy code. The phrase strikes disgust in the hearts of programmers. Although our first joy of programming may have been intense, the misery of dealing with legacy code is often sufficient to extinguish that flame."  
+>Legacy code. The phrase strikes disgust in the hearts of programmers. Although our first joy of programming may have been intense, the misery of dealing with legacy code is often sufficient to extinguish that flame.  
 >[Michael Feathers, Working Effectively with Legacy Code](https://www.amazon.de/Working-Effectively-Legacy-Robert-Martin/dp/0131177052).  
 
 That's why we, developers, naturally tend to implement new functionality outside of it. With the rise of microservices, this tendency escalated to a whole new level. Anytime we want to implement something new, we think of creating a new web service. Applying this approach regularly, we add more moving parts. Losing control over this process, we risk creating a highly unreliable system.  
