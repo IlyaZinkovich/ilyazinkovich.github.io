@@ -56,7 +56,7 @@ I would argue that this error handling logic is too far away from the accident a
 
 Interestingly, the method will run asynchronously immediately returning **null** to the caller. **NullPointerException** is just a matter of time.
 
-We can solve it only by wrapping the return value in the [Future](https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html). However, this approach introduces the problem of dealing with a terrible (synchronous and non-composable) [Future.get(_)](https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html#get()) API on the client side.
+We can solve it only by wrapping the return value in the [Future](https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html). However, this approach introduces the problem of dealing with an outdated (synchronous and non-composable) [Future.get(_)](https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html#get()) API on the client side.
 
 {% gist c1037cb2730292f17c350a13053c48e4 %}
 
