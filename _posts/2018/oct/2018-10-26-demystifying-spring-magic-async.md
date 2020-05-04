@@ -66,7 +66,7 @@ Hopefully, there is a solution.
 
 ## Modern Approach to Async Programming
 
-@Async annotation was introduced in Spring 3.0. It was December 2009, Java 6 era with a completely broken Future abstraction.  
+@Async annotation was introduced in Spring 3.0. It was December 2009, Java 6 era with a weak Future abstraction.  
 5 years later Java 8 released with a game-changing [CompletableFuture](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html) API.  
 CompletableFuture abstracts a composable asynchronous computation. Let's use it in our example.
 
