@@ -14,8 +14,8 @@ published: true
 
 Caching is important to build efficient software. And there is a large variety of excellent caching libraries in Java that will help you with it. However, in Spring-based applications, all of them are primarily used indirectly via [Spring caching abstractions](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-caching.html). If you go through any Spring tutorial on caching you will be easily convinced that adding a cache to a Spring app is an absolute no-brainer.    
 
->"Want to cache a result of the method invocation?  
->Annotate this method with `@Cacheable` and Spring will do the rest."  
+>Want to cache a result of the method invocation?  
+>Annotate this method with `@Cacheable` and Spring will do the rest.  
 >Every Spring Tutorial Author.  
 
 But when it comes to a slightly non-trivial caching problem or when the application is being heavily refactored, Spring force is leaving you and everything breaks apart. Let's see why it happens and what are the alternatives.  
