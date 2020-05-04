@@ -1,7 +1,7 @@
 ---
 layout: post
 date: 2019-02-06
-title: Dynamic Configuration Done Right
+title: Non-Invasive Dynamic Configuration
 description: |
 keywords:
   - modular design
