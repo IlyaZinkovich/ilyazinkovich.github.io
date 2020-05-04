@@ -1,7 +1,7 @@
 ---
 layout: post
 date: 2019-04-07
-title: "Caching Without Compromises and Spring"
+title: Caching Without Compromises and Spring
 description: |
 keywords:
   - caching
