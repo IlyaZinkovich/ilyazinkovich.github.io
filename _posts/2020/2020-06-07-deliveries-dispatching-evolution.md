@@ -12,26 +12,31 @@ urlimage:
 published: false
 ---
 
-In this article, I'd like to show how the domain model of the deliveries assignment evolves with the business.
-Classic optimization problems at the core of the service we all enjoyed during the quarantine.
+In this article, I'd like to show how the domain model of the food delivery dispatching evolves with the business. And which classic optimization problems are at the core of the service we all enjoyed a lot during the quarantine.  
 
 <!--more-->
 
 ## Level 0. Individual Assignment
 
-We've just started our business and choose to attract the new customers by offering lower delivery times compared to our competitors. The number of orders is low.
-We just want to get the basics right and therefore start with the simplest dispatching algorithm.
-When the order is placed in the system we assign the closest idle courier to it.
+Imagine we are the new delivery startup. We've just started our business and choose to attract customers by offering low delivery times.  
+We need to get the basics right, so we start with a straightforward dispatching algorithm - when the customer places the order, we assign the closest idle courier to it.
 
-Search for couriers -> Rank them by ETA -> Assign the best.
+![alt text](https://ilyazinkovich-blog-images.s3.eu-central-1.amazonaws.com/2020-06-07-deliveries-dispatching-evolution/level-0.svg?style=centered "Level 0")
 
 ## Level 1. Batch Assignment
 
-As we get more and more orders, we start to question whether the algorithm makes the right decisions.
-We know more about food preparation time. Since the food takes time to prepare, what if we take our time to collect more orders and assign them collectively, minimising the wait time at restaurant.
+As we progress, we start seeing that couriers waste a lot of their time at restaurants waiting for the order to be prepared.  
+To minimize this waste, we ask restaurants to provide us approximate food preparation time when they accept the order (or predict it with our groundbreaking machine learning model).  
+We can use this information not only to improve the selection of captains per order, but also to batch multiple orders and do the optimal assignment.
+
+Using this information during the dispatching process, we know how much the courier will wait at the restaurant if he arrives early and how he will delay the delivery if he arrives late.  
+Since the food always takes time to prepare, what if we take our time to collect more orders and assign them collectively, minimising the wait time at restaurant.
 Hm, sounds like a classic "Assignment Problem" - given N tasks and M workers make optimal 1-1 assignments. (minimise the cost of assignment)
 We play with the cost function that balance the efficiency with customer experience.
-Search for couriers -> Rank them by Cost Function -> Solve the Assignment Problem with Hungarian algorithm.
+Search for couriers -> Rank them by Cost Function -> Solve the Assignment Problem with Hungarian algorithm.  
+`Cost = alpha * Wait Time + beta * Delay Time`, where _alpha_ and _beta_ coefficients are defined empirically per market based on what's most important there at the moment - the supply efficiency or the customer experience.
+
+![alt text](https://ilyazinkovich-blog-images.s3.eu-central-1.amazonaws.com/2020-06-07-deliveries-dispatching-evolution/level-1.svg?style=centered "Level 1")
 
 ## Level 2. Pooling Workaround
 
