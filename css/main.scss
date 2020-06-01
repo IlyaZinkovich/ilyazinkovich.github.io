@@ -38,7 +38,7 @@ p, li, .link {
   font-size: 18px;
 }
 
-h1, h2, h3, h4, h5, article div.subline ul li {
+h1, h2, h3, h4, h5, div.subline ul li {
   font-family: 'Helvetica', sans-serif;
 }
 
@@ -77,6 +77,23 @@ header {
   ul li {
     display: inline;
     margin-right: .4em;
+  }
+}
+
+div.subline {
+  ul {
+    margin-left: 0em;
+    color: gray;
+  }
+  ul li {
+    list-style: none;
+    display: inline;
+  }
+  ul li:after {
+    content: " \00b7";
+  }
+  ul li:last-child:after {
+    content: none;
   }
 }
 
@@ -122,23 +139,6 @@ article {
   ul,
   ol {
     margin-left: 3em;
-  }
-
-  div.subline {
-    ul {
-      margin-left: 0em;
-      color: gray;
-    }
-    ul li {
-      list-style: none;
-      display: inline;
-    }
-    ul li:after {
-      content: " \00b7";
-    }
-    ul li:last-child:after {
-      content: none;
-    }
   }
 }
 

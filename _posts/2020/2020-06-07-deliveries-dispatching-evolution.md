@@ -28,7 +28,7 @@ Search for couriers -> Rank them by ETA -> Assign the best.
 ## Level 1. Batch Assignment
 
 As we get more and more orders, we start to question whether the algorithm makes the right decisions.
-Since the food takes time to prepare, what if we take our time to collect more orders and assign them collectively.
+We know more about food preparation time. Since the food takes time to prepare, what if we take our time to collect more orders and assign them collectively, minimising the wait time at restaurant.
 Hm, sounds like a classic "Assignment Problem" - given N tasks and M workers make optimal 1-1 assignments. (minimise the cost of assignment)
 We play with the cost function that balance the efficiency with customer experience.
 Search for couriers -> Rank them by Cost Function -> Solve the Assignment Problem with Hungarian algorithm.
