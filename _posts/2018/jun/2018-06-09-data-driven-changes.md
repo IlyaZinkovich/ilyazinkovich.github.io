@@ -13,8 +13,8 @@ urlimage: https://bit.ly/2Hzbuo2
 
 When we make changes that span across multiple services in a distributed system we face series of challenges. Risk of breaking the whole system is very high.  
 
->Integrating two software systems is usually more like performing a heart transplant than snapping together LEGO blocks.  
->[John D. Cook, 3 February 2011](https://www.johndcook.com/blog/2011/02/03/lego-blocks-and-organ-transplants/).  
+> Integrating two software systems is usually more like performing a heart transplant than snapping together LEGO blocks.  
+> -- John D. Cook, <cite>[LEGO Blocks and Organ Transplants, 3 February 2011](https://www.johndcook.com/blog/2011/02/03/lego-blocks-and-organ-transplants/).  
 
 This is very unfortunate, but we need to adapt to these obstacles and develop better tools and practices to overcome these problems.  
 GitHub developed a small library for fearless refactoring called [scientist](https://github.com/github/scientist). The idea is to make data-driven decisions on refactored code rollout instead of pushing it into production and hoping that nothing will crash (while keeping in mind a rollback).  

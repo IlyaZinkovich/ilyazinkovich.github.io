@@ -14,7 +14,7 @@ urlimage:
 Object-Relational Mapping ([ORM](https://en.wikipedia.org/wiki/Object-relational_mapping)) is one of the most controversial but still widely used tools in web application development. Ted Neward colorfully explained the most fundamental problems with ORM back in 2006, calling it The Vietnam of Computer Science.
 
 >In the case of automated Object-Relational Mapping, early successes yield a commitment to use ORM in places where success becomes more elusive, and over time, isn’t a success at all due to the overhead of time and energy required to support it through all possible use-cases.  
->[Ted Neward, 26 June 2006](http://blogs.tedneward.com/post/the-vietnam-of-computer-science/)
+> -- Ted Neward, <cite>[The Vietnam of Computer Science, 26 June 2006](http://blogs.tedneward.com/post/the-vietnam-of-computer-science/)</cite>.
 
 Despite all the blame, ORM appeared on all the projects I worked on so far.
 Unfortunately, most of them had unnecessary complexity due to the traditional use of the ORM.  

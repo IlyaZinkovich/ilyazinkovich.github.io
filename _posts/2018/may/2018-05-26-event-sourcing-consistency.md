@@ -12,8 +12,8 @@ urlimage: https://bit.ly/2IJ2gea
 ---
 
 Event Sourcing became very popular with the recent rise of [reactive systems](https://www.reactivemanifesto.org/). However, the idea is not new and has a very concise definition polished with the years of research:  
->Capture all changes to an application state as a sequence of events  
->[Martin Fowler, 12 December 2005](https://martinfowler.com/eaaDev/EventSourcing.html).  
+> Capture all changes to an application state as a sequence of events  
+> -- Martin Fowler, <cite>[Event Sourcing, 12 December 2005](https://martinfowler.com/eaaDev/EventSourcing.html)</cite>.  
 
 Although event sourcing is not directly related to eventual consistency (apart from the word "event" in the name), the common misconception is that you get eventual consistency for free while building event sourced system.  
 In reality, the only kind of consistency you get for free is **in**consistency.  

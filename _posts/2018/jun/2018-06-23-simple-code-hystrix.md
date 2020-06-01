@@ -14,8 +14,8 @@ urlimage:
 Writing maintainable code is definitely hard. It's even hard to define what "maintainable" means.  
 After watching an enlightening [talk by the author of Clojure lang](https://www.infoq.com/presentations/Simple-Made-Easy/), I’d say that maintainable code should primarily be simple.  
 
->Simple is often erroneously mistaken for easy. "Easy" means "to be at hand", "to be approachable". "Simple" is the opposite of "complex" which means "being intertwined", "being tied together". Simple != easy.  
->[Rich Hickey, 20 October 2011](https://www.infoq.com/presentations/Simple-Made-Easy/). 
+> Simple is often erroneously mistaken for easy. "Easy" means "to be at hand", "to be approachable". "Simple" is the opposite of "complex" which means "being intertwined", "being tied together". Simple != easy.  
+> -- Rich Hickey, <cite>[Simple Made Easy, 20 October 2011](https://www.infoq.com/presentations/Simple-Made-Easy/)</cite>. 
 
 Reality is that we prefer easy "at hand" solutions that look innocent but lead to a poor maintenance experience.  
 Let’s explore how simple code differs from easy in practice using Hystrix library as an example.  
