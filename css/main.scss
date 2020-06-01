@@ -33,21 +33,13 @@ $em: 19px;
   padding: 0;
 }
 
-p, h1, h2, h3, h4, h5, li {
-  font-family: 'Lora', serif;
-}
-
-p {
-  font-size: 18px;
-}
-
-li {
-  font-size: 18px;
-}
-
-.link {
+p, li, .link {
   font-family: 'Lora', serif;
   font-size: 18px;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Helvetica', sans-serif;
 }
 
 body {
@@ -113,10 +105,14 @@ article {
     font-weight: bold;
   }
 
-  p,
   h1,
   h2,
-  h3,
+  h3 {
+    margin-bottom: .2em;
+    margin-top: 1em;
+  }
+
+  p,
   ul,
   ol {
     margin-bottom: .4em;

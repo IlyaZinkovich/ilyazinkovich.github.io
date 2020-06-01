@@ -1,18 +1,19 @@
 ---
 layout: post
-date: 2020-06-07
+date: 2020-06-01
 title: "Evolution of Food Delivery Dispatching"
 description: |
 keywords:
   - deliveries
-  - design
-categories: design
+  - dispatching
+  - domain-driven design
+categories: domain-driven design
 urlimage: 
 published: false
 ---
 
 In this article, I'd like to show how the domain model of the deliveries assignment evolves with the business.
-Classic Optimization problems at the core of the service we all enjoyed during the quarantine.
+Classic optimization problems at the core of the service we all enjoyed during the quarantine.
 
 <!--more-->
 
@@ -44,3 +45,5 @@ And if the algorithms chooses the in-ride captain, we can even delay this assign
 You don't consider assigning order 1 vs assigning order 1 + order 2.
 For this we should as a Mixed Integer Problem, more precisely - the vehicle routing problem (VRP), which is described in details in the DoorDash blog: https://doordash.engineering/2020/02/28/next-generation-optimization-for-dasher-dispatch-at-doordash/amp
 One important point here is that to solve this problem correctly and efficiently, we absolutely must use a commercial Optimization Solver like Gurobi, XPress, CPLEX and the like. Fully utilise the free trial to measure the profit to the price of the commercial package.
+
+Icons made by <a href="https://www.flaticon.com/authors/ultimatearm" title="ultimatearm">ultimatearm</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
