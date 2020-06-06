@@ -205,43 +205,30 @@ blockquote {
       right: .3 * $em;
       top: -.7 * $em;
     }
-
-    .icon {
-      $size: 35px;
-      border: 1px solid $gray;
-      border-radius: 50%;
-      color: $gray;
-      display: inline-block;
-      height: $size;
-      width: $size;
-      margin-right: .2 * $em;
-      padding: 5px;
-      text-align: center;
-      vertical-align: middle;
-
-      &:hover {
-        background-color: $gray;
-        color: $white;
-      }
-    }
-
-    .icon::before {
-      font-size: $em;
-      line-height: 1.2 * $em;
-    }
-
-    .icon-twitter:hover { color: #00aced; }
-    .icon-stackoverflow:hover { color: #f48024; }
-    .icon-github:hover { color: #800080; }
-    .icon-facebook:hover { color: #3b5998; }
-    .icon-linkedin:hover { color: #007bb6; }
-    .icon-instagram:hover { color: #fd1d1d; }
-    .icon-rss:hover { color: #f60; }
-    .icon-reddit:hover { color: #cee3f8; }
-    .icon-pinterest:hover { color: #c92228; }
-    .icon-youtube:hover { color: #e52d27; }
-    .icon-angellist:hover { color: #6694ca; }
-    .icon-gitter:hover { color: #ff006e; }
-    .icon-podcast:hover { color: #f50; }
   }
 }
+
+#share-buttons {display: inline-block; vertical-align: middle; }
+#share-buttons:after {content: ""; display: block; clear: both;}
+#share-buttons > div {
+    position: relative;
+    text-align: left; 
+    height: 36px; 
+    width: 32px; 
+    float: left; 
+    text-align: center;
+}
+#share-buttons > div > svg {height: 16px; fill: gray; margin-top: 10px;}
+#share-buttons > div:hover {cursor: pointer;}
+#share-buttons > div.facebook:hover > svg {fill: #3B5998;}
+#share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
+#share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
+#share-buttons > div.pinterest:hover > svg {fill: #CB2027;}
+#share-buttons > div.gplus:hover > svg {fill: #dd4b39;}
+#share-buttons > div.mail:hover > svg {fill: #7D7D7D;}
+#share-buttons > div.instagram:hover > svg {fill: #C73B92;}
+#share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
+#share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
+#share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
+#share-buttons > div.pinterest > svg {height: 20px; margin-top: 9px;}
+#share-buttons > div.mail > svg {height: 14px; margin-top: 11px;}

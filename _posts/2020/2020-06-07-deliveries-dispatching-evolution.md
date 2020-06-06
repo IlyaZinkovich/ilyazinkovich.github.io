@@ -6,8 +6,8 @@ description: |
 keywords:
   - deliveries
   - dispatching
-  - domain-driven design
-categories: domain-driven design
+  - algorithms
+categories: algorithms
 urlimage: 
 published: false
 ---
@@ -18,7 +18,7 @@ In this article, I'd like to show how the domain model of the food delivery disp
 
 ## Level 0. Individual Assignment
 
-Imagine we are the new delivery startup. We've just started our business and choose to attract customers by offering low delivery times.  
+Imagine we are the new delivery startup. We've just started our business and decided to attract customers by offering low delivery times.  
 We need to get the basics right, so we start with a straightforward dispatching algorithm - when the customer places the order, we assign the closest idle courier to it.
 
 ![alt text](https://ilyazinkovich-blog-images.s3.eu-central-1.amazonaws.com/2020-06-07-deliveries-dispatching-evolution/level-0.svg?style=centered "Level 0")
@@ -26,8 +26,7 @@ We need to get the basics right, so we start with a straightforward dispatching 
 ## Level 1. Batch Assignment
 
 As we progress, we start seeing that couriers waste a lot of their time at restaurants waiting for the order to be prepared.  
-To minimize this waste, we ask restaurants to provide us approximate food preparation time when they accept the order (or predict it with our groundbreaking machine learning model).  
-We can use this information not only to improve the selection of captains per order, but also to batch multiple orders and do the optimal assignment.
+We can ask restaurants to provide us approximate food preparation time when they accept the order (or predict it with our groundbreaking machine learning model), and then leverage this information to minimise waiting time and batch the orders to improve but also.
 
 Using this information during the dispatching process, we know how much the courier will wait at the restaurant if he arrives early and how he will delay the delivery if he arrives late.  
 Since the food always takes time to prepare, what if we take our time to collect more orders and assign them collectively, minimising the wait time at restaurant.
