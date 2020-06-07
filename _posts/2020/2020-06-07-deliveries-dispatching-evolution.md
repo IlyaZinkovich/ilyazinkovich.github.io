@@ -23,21 +23,20 @@ We need to get the basics right, so we start with a straightforward dispatching 
 
 ![alt text](https://ilyazinkovich-blog-images.s3.eu-central-1.amazonaws.com/2020-06-07-deliveries-dispatching-evolution/level-0.svg?style=centered "Level 0")
 
-## Level 1. Batch Assignment
+## Level 1. Collective Assignment
 
-As we progress, we start seeing that couriers waste a lot of their time at restaurants waiting for the order to be prepared.  
-We can ask restaurants to provide us approximate food preparation time when they accept the order (or predict it with our groundbreaking machine learning model), and then leverage this information to minimise waiting time and batch the orders to improve but also.
+As we progress, we start seeing that couriers waste a lot of their time at restaurants waiting for the order to be prepared. We can ask restaurants to provide us approximate food preparation time when they accept the order (or predict it with our groundbreaking machine learning model) and then leverage this information to make dispatching decisions that minimize waiting time.  
+But as we know that we have some time before the courier needs to arrive at the restaurant, we can do more than that. Imagine two orders dispatched at nearly the same time. Couriers' expected arrival time is on the diagram along with the time when the order will be ready at the respective restaurant. Which courier would you choose for which order?  
 
-Using this information during the dispatching process, we know how much the courier will wait at the restaurant if he arrives early and how he will delay the delivery if he arrives late.  
-Since the food always takes time to prepare, what if we take our time to collect more orders and assign them collectively, minimising the wait time at restaurant.
-Hm, sounds like a classic "Assignment Problem" - given N tasks and M workers make optimal 1-1 assignments. (minimise the cost of assignment)
-We play with the cost function that balance the efficiency with customer experience.
-Search for couriers -> Rank them by Cost Function -> Solve the Assignment Problem with Hungarian algorithm.  
-`Cost = alpha * Wait Time + beta * Delay Time`, where _alpha_ and _beta_ coefficients are defined empirically per market based on what's most important there at the moment - the supply efficiency or the customer experience.
+![alt text](https://ilyazinkovich-blog-images.s3.eu-central-1.amazonaws.com/2020-06-07-deliveries-dispatching-evolution/concurrent-dispatch.svg?style=centered "Concurrent Dispatch")
 
-![alt text](https://ilyazinkovich-blog-images.s3.eu-central-1.amazonaws.com/2020-06-07-deliveries-dispatching-evolution/level-1.svg?style=centered "Level 1")
+In this situation, two orders are competing couriers. The first getting assigned will win, the other will lose. But will our business win as a result? Sometimes it will, other times - it won't.  
+Instead of relying on pure luck, we can use some portion of time while the orders are prepared to collect them and then run a fair algorithm that will judge which assignment is economically better.  
+Fortunately, we have a mathematical model for that called [Assignment Problem](https://en.wikipedia.org/wiki/Assignment_problem) with a reliable [Hungarian Algorithm](https://en.wikipedia.org/wiki/Hungarian_algorithm) that solves it. The only thing we need is to define the criteria for the algorithm to compare the alternatives. In our case, we can say that each assignment incurrs the waiting cost (if the courier arrives too early) and the delay cost (if the captain arrives too late). The algorithm will use this information and dispatch the orders minimising the total cost.  
 
-## Level 2. Pooling Workaround
+![alt text](https://ilyazinkovich-blog-images.s3.eu-central-1.amazonaws.com/2020-06-07-deliveries-dispatching-evolution/assignment-problem.svg?style=centered "Assignment Problem")
+
+## Level 2. Pooling
 
 As our business grows, we start experiencing "supply crunch" - every breakfast, lunch and dinner we get more orders that our couriers can handle and we start rejecting the orders. (show it on a diagram - idle couriers/minute vs number of orders) We've already tried optimal shifts planning and employed the maximum number of couriers that makes economical sense. In order to maximise the efficiency of our supply at the cost of potential increase in the delivery time, we deide to implement pooling of orders - we want to be able to assign multiple order to a single courier at once.
 Can the Hungarian algorithm handle this? - Yes, but we should change the definition of a "task" in a classical algorithm.
