@@ -40,17 +40,12 @@ keywords:
 <article class="center">
   {% if paginator.previous_page %}
   {% if paginator.previous_page == 1 %}
-  <a href="/">&lt;&lt;</a>
+  <h3><a href="/">&#8592;Newer Posts</a></h3>
   {% else %}
-  <a href="/p/{{ paginator.previous_page }}">&lt;&lt;</a>
+  <h3><a href="/p/{{ paginator.previous_page }}">&#8592;Newer Posts</a></h3>
   {% endif %}
-  {% else %}
-  <span class="mute">&lt;&lt;</span>
   {% endif %}
-  page {{ paginator.page }} of {{ paginator.total_pages }}
   {% if paginator.next_page %}
-  <a href="/p/{{ paginator.next_page }}">&gt;&gt;</a>
-  {% else %}
-  <span class="mute">&gt;&gt;</span>
+  <h3><a href="/p/{{ paginator.next_page }}">Older Posts&#8594;</a></h3>
   {% endif %}
 </article>
