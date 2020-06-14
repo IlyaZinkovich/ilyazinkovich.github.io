@@ -12,13 +12,14 @@ urlimage:
 published: false
 ---
 
-In this article, I'd like to show how the domain model of the food delivery dispatching evolves with the business. And which classic optimization problems are at the core of the service we all enjoyed a lot during the quarantine.  
+In this article, I'd like to show how the domain model of the food delivery dispatching evolves with the business, based on my experience of building the dispatching system powering food delivery in [Careem](https://www.careem.com).
+And which classic optimization problems are at the core of the service we all enjoyed a lot during the quarantine.  
 
 <!--more-->
 
 ## Level 0. Individual Assignment
 
-Imagine we are the new delivery startup. We've just started our business and decided to attract customers by offering low delivery times.  
+Imagine we are the new delivery startup. We've just started our business and decided to attract customers by offering low delivery time.  
 We need to get the basics right, so we start with a straightforward dispatching algorithm - when the customer places the order, we assign the closest idle courier to it.
 
 ![alt text](https://ilyazinkovich-blog-images.s3.eu-central-1.amazonaws.com/2020-06-07-deliveries-dispatching-evolution/level-0.svg?style=centered "Level 0")
@@ -26,13 +27,14 @@ We need to get the basics right, so we start with a straightforward dispatching 
 ## Level 1. Collective Assignment
 
 As we progress, we start seeing that couriers waste a lot of their time at restaurants waiting for the order to be prepared. We can ask restaurants to provide us approximate food preparation time when they accept the order (or predict it with our groundbreaking machine learning model) and then leverage this information to make dispatching decisions that minimize waiting time.  
-But as we know that we have some time before the courier needs to arrive at the restaurant, we can do more than that. Imagine two orders dispatched at nearly the same time. Couriers' expected arrival time is on the diagram along with the time when the order will be ready at the respective restaurant. Which courier would you choose for which order?  
+But as we have some time before the courier needs to arrive at the restaurant, we can do more.  
+Imagine two orders dispatched at nearly the same time. Couriers' expected arrival time is on the diagram along with the time when the order will be ready at the respective restaurant. Which courier would you choose for which order?  
 
 ![alt text](https://ilyazinkovich-blog-images.s3.eu-central-1.amazonaws.com/2020-06-07-deliveries-dispatching-evolution/concurrent-dispatch.svg?style=centered "Concurrent Dispatch")
 
-In this situation, two orders are competing couriers. The first getting assigned will win, the other will lose. But will our business win as a result? Sometimes it will, other times - it won't.  
-Instead of relying on pure luck, we can use some portion of time while the orders are prepared to collect them and then run a fair algorithm that will judge which assignment is economically better.  
-Fortunately, we have a mathematical model for that called [Assignment Problem](https://en.wikipedia.org/wiki/Assignment_problem) with a reliable [Hungarian Algorithm](https://en.wikipedia.org/wiki/Hungarian_algorithm) that solves it. The only thing we need is to define the criteria for the algorithm to compare the alternatives. In our case, we can say that each assignment incurrs the waiting cost (if the courier arrives too early) and the delay cost (if the captain arrives too late). The algorithm will use this information and dispatch the orders minimising the total cost.  
+In this situation, two orders are competing for couriers. The first assigned will win, the other will lose. But will our business win as a result? Sometimes it will, other times - it won't.  
+Instead of relying on pure luck, we can use some portion of time while the orders are prepared to collect them and then run a fair algorithm that will choose the economically best assignment.  
+Fortunately, we have a mathematical model for that called [Assignment Problem](https://en.wikipedia.org/wiki/Assignment_problem) with a reliable [Hungarian Algorithm](https://en.wikipedia.org/wiki/Hungarian_algorithm) that solves it. The only thing we need is to define the criteria for the algorithm to compare the alternatives. For instance, we can say that each assignment incurrs the waiting cost (if the courier arrives too early) and the delay cost (if the captain arrives too late). The algorithm will use this information and dispatch the orders minimising the total cost.  
 
 ![alt text](https://ilyazinkovich-blog-images.s3.eu-central-1.amazonaws.com/2020-06-07-deliveries-dispatching-evolution/assignment-problem.svg?style=centered "Assignment Problem")
 
