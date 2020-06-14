@@ -40,7 +40,7 @@ Fortunately, we have a mathematical model for that called [Assignment Problem](h
 
 ## Level 2. Pooling
 
-As our product becomes more popular, we start experiencing periods when the demand for our service significantly outstrips the economically viable level of supply, which leads to an increased number of delays and cancellations. The difference between the number of incoming orders and the number of available couriers looks as follows.  
+As our service becomes more popular, we start experiencing periods when the demand for our service significantly outstrips the economically viable level of supply, which leads to an increased number of delays and cancellations. The difference between the number of incoming orders and the number of available couriers looks as follows.  
 
 ![alt text](/images/posts/2020-06-07-deliveries-dispatching-evolution--supply-demand.svg?style=centered "Supply Demand Mismatch")
 
@@ -58,7 +58,8 @@ Although a combination of the route generator and the Hungarian algorithm solver
 
 The solution is to unite these two algorithms under a single consistent model - [the Vehicle Routing Problem](https://en.wikipedia.org/wiki/Vehicle_routing_problem), which avoids the issues outlined above by design and is described in great detail on [the DoorDash blog](https://doordash.engineering/2020/02/28/next-generation-optimization-for-dasher-dispatch-at-doordash/amp/).  
 One important point in the DoorDash article is that to solve this problem correctly and efficiently, we should use a commercial Optimization Solver like [Gurobi](https://www.gurobi.com), [CPLEX](https://www.ibm.com/analytics/cplex-optimizer), or [XPress](https://www.fico.com/en/products/fico-xpress-optimization).  
+Mixing accurate data with tailored cost functions plugged into these high-quality optimization solvers, we can achieve high-quality dispatching.  
 
-With these batteries included, our primary effort becomes the development of exceptional experiences around this powerful dispatching engine at the heart of the delivery business.  
+With all these batteries included, our primary effort becomes the development of exceptional experiences on top of this powerful dispatching engine at the heart of the delivery business.  
 
 <p style="font-size: 10px">Icons made by <a href="https://www.flaticon.com/authors/ultimatearm" title="ultimatearm">ultimatearm</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></p>
