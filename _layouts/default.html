@@ -1,5 +1,6 @@
 ---
 layout: compress
+urlimage: https://bit.ly/2xTdV58
 ---
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"
@@ -9,7 +10,7 @@ layout: compress
     <meta name="description" content="{{ page.description }}" />
     <meta name="keywords" content="{{ page.keywords | join:', ' | xml_escape }}" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"/>
-    <meta property="og:image" content="http://bit.ly/2ZW2KTq" />
+    <meta property="og:image" content="{{ page.urlimage }}" />
     <meta property='og:title' content="{{ page.title }}"/>
     <meta property='og:description' content="{{ page.title }}"/>
     <meta property='og:url' content="{{ page.url }}"/>
