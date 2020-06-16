@@ -9,7 +9,7 @@ keywords:
   - algorithms
 categories: algorithms
 urlimage: 
-published: false
+published: true
 ---
 
 After quite some time of working on dispatching at [Careem](https://www.careem.com), I'd like to show how dispatching evolves with the business and which classic mathematical problems are at the core of the service we all enjoyed during the lockdown.  
