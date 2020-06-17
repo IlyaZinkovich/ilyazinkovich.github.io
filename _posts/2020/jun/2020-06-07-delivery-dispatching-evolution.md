@@ -26,7 +26,7 @@ We need to get the basics right, so we start with a straightforward dispatching 
 
 ## Level 1. Batch Assignment
 
-As we progress, we start seeing that couriers waste a lot of their time at restaurants waiting for the order to be prepared. We can ask restaurants to provide us approximate food preparation time when they accept the order (or predict it with our groundbreaking machine learning model) and then leverage this information to make dispatching decisions that minimize waiting time.  
+As we progress, we notice that couriers waste a lot of their time at restaurants waiting for the order to be prepared. We can ask restaurants to provide us approximate food preparation time when they accept the order (or predict it with a machine learning model) and leverage this information in dispatching decisions to minimize waiting time, increasing our couriers' efficiency.  
 But as we have some time before the courier needs to arrive at the restaurant, we can do more.  
 Imagine two orders dispatched at nearly the same time. Couriers' expected arrival time is on the diagram along with the time when the order will be ready at the respective restaurant. Which courier would you choose for which order?  
 
