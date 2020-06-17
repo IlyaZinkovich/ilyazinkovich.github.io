@@ -8,7 +8,7 @@ keywords:
   - dispatching
   - algorithms
 categories: algorithms
-urlimage: https://ilyazinkovich-blog-images.s3.eu-central-1.amazonaws.com/2020-06-07-deliveries-dispatching-evolution/concurrent-dispatch.svg
+urlimage: https://ilyazinkovich-blog-images.s3.eu-central-1.amazonaws.com/2020-06-07-deliveries-dispatching-evolution/preview.png
 published: true
 ---
 
