@@ -58,7 +58,7 @@ Although a combination of the route generator and the Hungarian algorithm solver
 
 The solution is to unite these two algorithms under a single consistent model - [the Vehicle Routing Problem](https://en.wikipedia.org/wiki/Vehicle_routing_problem), which avoids the issues outlined above by design and is described in great detail on [the DoorDash blog](https://doordash.engineering/2020/02/28/next-generation-optimization-for-dasher-dispatch-at-doordash/amp/).  
 One important point in the DoorDash article is that to solve this problem correctly and efficiently, we should use a commercial Optimization Solver like [Gurobi](https://www.gurobi.com), [CPLEX](https://www.ibm.com/analytics/cplex-optimizer), or [XPress](https://www.fico.com/en/products/fico-xpress-optimization).  
-Mixing accurate data with tailored cost functions plugged into these high-quality optimization solvers, we can achieve high-quality dispatching, which ensures that supply meets demand in the best economical way.  
+Mixing accurate data with tailored cost functions plugged into these high-quality optimization solvers, we can achieve superior dispatching, which ensures that supply meets demand in the best economical way.  
 
 With all these batteries included, our primary effort becomes the development of exceptional experiences on top of this powerful dispatching engine at the heart of the delivery business.  
 
