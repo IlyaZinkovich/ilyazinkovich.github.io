@@ -18,11 +18,19 @@ Example of food delivery couriers shifts planning.
 
 <!--more-->
 
+## Domain
+
+In the food delivery business, the fleet generally consists of full-time and part-time couriers.
+Full-timers provide basic system operations, have strict shifts, and receive a fixed salary. Part-timers, on the other hand, boost system performance during periods of high demand and earn based on their availability.  
+
+// add an image comparing the two
+
+Our goal is to create an optimal shift schedule for both full-time and part-time couriers, satisfying a set of business constraints.  
+
 ## Measure
 
 The first step in improvement is measurement of its current performance.
 
-## Planning
+## Linear Programming to the Rescue
 
-In the food delivery business, the fleet generally consists of full-time and part-time couriers.
-Full-timers provide basic system operations, have strict shifts, and receive a fixed salary. Part-timers, on the other hand, boost system performance during periods of high demand and earn based on their availability.  
+In order to solve this problem, we'll use a mathematical method called [Linear Programming](https://en.wikipedia.org/wiki/Linear_programming).
