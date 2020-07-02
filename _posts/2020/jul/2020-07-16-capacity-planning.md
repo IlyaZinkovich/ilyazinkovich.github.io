@@ -37,5 +37,5 @@ In order to solve this problem, we'll use a mathematical method called [Linear P
 This method requires us to specify:
 1. set of variables.
 2. cost function - a weighted sum of the variables.
-3. set of linear constraints on the variables.
+3. set of linear constraints on the variables.  
 In return, it the automated solver gives us the values of variables that minimise the cost function.  
