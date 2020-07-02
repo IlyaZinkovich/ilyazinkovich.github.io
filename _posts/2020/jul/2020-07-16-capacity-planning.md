@@ -29,7 +29,18 @@ Our goal is to create an optimal shift schedule for both full-time and part-time
 
 ## Measure
 
-The first step in improvement is measurement of its current performance.
+The first step in improvement is measurement of the current performance.
+If we collect telemetry from couriers' devices and divide their available time into busy (when they are delivering the order) and idle (when they are waiting for the new order) we'll see the following picture:
+
+// add an image of capacity utilisation
+
+Hm, our average capacity utilisation (total busy hours / total available hours) is only about 50%. Shouldn't our couriers be busy all the time?  
+Simply put, no. In the presence of variable demand (which is a natural quality of the food delivery business) high capacity utilisation causes significant growth in delivery time which directly affects customer experience.  
+However, there's always a sweet spot which balances efficiency with customer experience. Let's say for our system the optimal capacity ulitisation is 80%. And we can set ourselves an ambitious target to maintain it throughout the day.
+
+// add an image (plot) of capacity utilisation before and after
+
+Alright, let's now build a shifts schedule for our couriers that conforms to this level of capacity.
 
 ## Linear Programming to the Rescue
 
