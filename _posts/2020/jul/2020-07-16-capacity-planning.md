@@ -21,7 +21,7 @@ Example of food delivery couriers shifts planning.
 ## Domain
 
 In the food delivery business, the fleet generally consists of full-time and part-time couriers.
-Full-timers provide basic system operations, have strict shifts, and receive a fixed salary. Part-timers, on the other hand, boost system performance during periods of high demand and earn based on their availability.  
+Full-timers provide basic system operations, have strict shifts, and receive a fixed salary. Part-timers, on the other hand, boost the system performance during periods of high demand and earn based on their availability.  
 
 // add an image comparing the two
 
@@ -33,4 +33,9 @@ The first step in improvement is measurement of its current performance.
 
 ## Linear Programming to the Rescue
 
-In order to solve this problem, we'll use a mathematical method called [Linear Programming](https://en.wikipedia.org/wiki/Linear_programming).
+In order to solve this problem, we'll use a mathematical method called [Linear Programming](https://en.wikipedia.org/wiki/Linear_programming) in a way that is supported by the modern programming libraries like [SciPy](https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.optimize.linprog.html).  
+This method requires us to specify:
+1. set of variables.
+2. cost function - a weighted sum of the variables.
+3. set of linear constraints on the variables.
+In return, it the automated solver gives us the values of variables that minimise the cost function.  
