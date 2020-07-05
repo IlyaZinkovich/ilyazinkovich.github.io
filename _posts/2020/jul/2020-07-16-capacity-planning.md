@@ -47,13 +47,17 @@ Alright, let's now build a shifts schedule for our couriers that conforms to thi
 In order to solve this problem, we'll use a mathematical method called [Linear Programming](https://en.wikipedia.org/wiki/Linear_programming) in a way that is supported by the modern programming libraries like [SciPy](https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.optimize.linprog.html).  
 
 This method requires us to specify:
-1. a set of variables.
+1. a set of variables with their value ranges.
 2. a cost function - a weighted sum of the variables.
-3. a set of linear constraints on the variables in the form of linear equations.  
+3. a set of constraints on the variables in the form of linear equations.  
 
 In return, the automated solver gives us the values of variables that minimise the cost function.  
 
 ## Modelling
+
+// only full-timers infeasible
+// only part-timers feasible
+// add part-timers
 
 The variables will be the number of captains in a shift.
 We'll have two 9-hour full-time shifts: one that starts in the morning and another one that ends in the evening.
@@ -67,7 +71,7 @@ The solver will output the following result:
 
 // add an image which shows that we need to hire mostly part-timers all the time
 
-We perfectly matched the requirements! But is it really possible to acquire 90 part-time couriers at peak for just one hour? You can ask your courier acquisition team and get an answer like: 90 - no, but 40 sounds reasonable.  
+We perfectly matched the requirements! But is it really possible to acquire 90 part-time couriers at peak for just one hour? You can ask your courier acquisition team and get an answer like: 90 - no, but half of that sounds reasonable.  
 How can we include this information into our model?
 We can specify a constraint for our variables, saying that Xi < 40 for i in (7, 22).
 
@@ -93,4 +97,5 @@ and so on.
 
 Let's run the solver again.
 Here is hour optimal shifts schedule:
+
 // add an image with the optimal shifts schedule
