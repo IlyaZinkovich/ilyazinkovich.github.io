@@ -1,7 +1,7 @@
 ---
 layout: post
 date: 2020-07-01
-title: "Data-Driven Capacity Planning"
+title: "Data-Driven Courier Shift Planning"
 description: |
 keywords:
   - deliveries
