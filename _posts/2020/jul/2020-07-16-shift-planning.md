@@ -12,25 +12,27 @@ urlimage:
 published: false
 ---
 
-[Last time](https://bit.ly/37Omcpz) we discussed how to boost the performance of a food delivery service by the use of advanced dispatching algorithms. Despite all the innovation we can do on that front, dispatching algorithms don't perform well when there's simply not enough couriers around.  
-In order to meet the expected level of demand we need to hire and manage our couriers accordingly, providing them healthy working conditions and maximising their profits.  
+[Last time](https://bit.ly/37Omcpz) we discussed how to boost the performance of a food delivery service by the use of advanced dispatching algorithms. Despite all the innovation we can do on that front, dispatching algorithms don't perform well when there're simply not enough couriers around.  
+To meet the expected level of demand we need to hire and manage our couriers accordingly, providing them healthy working conditions and maximising their profits.  
 This problem is not unique and was solved already in various contexts: from the bus lines scheduling to the proactive scaling of the cloud servers.  
 
 <!--more-->
 
 ## Challenge
 
-Couriers hiring and management is a pretty chaotic process in the beginning.  
-We start forming our fleet out of full-time salaried couriers to support basic operations and then experiment with adding the part-timers to boost the system performance during periods of high demand.  
-At some point we appear in the situation shown on the following diadram describing the couriers engagement throughout the day.
+Couriers hiring and management is pretty chaotic in the beginning. We start forming our fleet out of full-time salaried couriers to support basic operations and then experiment with adding the part-timers to boost the system performance during periods of high demand. After applying all of our efforts we appear in the following situtation - couriers spend only about 50% of their time delivering orders.  
 
-// add an image of couriers engagement
+![alt text](/images/posts/2020-07-16-shifts-planning--hourly-couriers-engagement-zoom-out.svg?style=centered "Couriers Engagement Zoom Out")  
 
-Hm, our average utilisation (total busy hours / total available hours) is only about 50%. Shouldn't our couriers be busy all the time?  
+If we zoom in and check hourly couriers' engagement, we'll see a clear reason for this - our supply is not elastic enough. Periods of very high engagement alternate with periods of low.  
+
+![alt text](/images/posts/2020-07-16-shifts-planning--hourly-couriers-engagement-zoom-in.svg?style=centered "Couriers Engagement Zoom In")  
+
+Another question is: shouldn't the couriers be busy all the time?
 Simply put, no. In the presence of variable demand (which is a natural quality of the food delivery business) high utilisation causes significant growth in delivery time which directly affects customer experience.  
 However, there's always a sweet spot which balances efficiency with customer experience. Let's say for our system the optimal ulitisation is 80%. And we can set ourselves an ambitious target to maintain it throughout the day.
 
-// add an image (plot) of utilisation before and after
+![alt text](/images/posts/2020-07-16-shifts-planning--hourly-couriers-engagement-ideal.svg?style=centered "Couriers Engagement Ideal")  
 
 Alright, let's now build a shifts schedule for our couriers that conforms to this level of capacity.
 
