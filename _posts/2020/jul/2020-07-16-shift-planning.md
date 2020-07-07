@@ -12,9 +12,9 @@ urlimage:
 published: false
 ---
 
-To achieve the best performance out of any system, we need to plan it capacity carefully. Be it the servers, bus lines, or couriers, we need to ensure the system has enough resources to handle the given level of demand.  
-This time I'll show you how we can use a mathematical model to make data-driven decisions on the capacity.
-Example of food delivery couriers shifts planning.
+[Last time](https://bit.ly/37Omcpz) we discussed how to boost the performance of a food delivery service by the use of advanced dispatching algorithms. Despite all the innovation we can do on that front, dispatching algorithms don't perform well when there's simply not enough couriers around.  
+In order to meet the expected level of demand, we need to plan our couriers' shifts carefully.  
+This problem is not unique and was solved already in various contexts: from the bus lines scheduling to the proactive scaling of the cloud servers.  
 
 <!--more-->
 
@@ -32,13 +32,13 @@ Our goal is to create an optimal shift schedule for both full-time and part-time
 The first step in improvement is measurement of the current performance.
 If we collect telemetry from couriers' devices and divide their available time into busy (when they are delivering the order) and idle (when they are waiting for the new order) we'll see the following picture:
 
-// add an image of capacity utilisation
+// add an image of utilisation
 
-Hm, our average capacity utilisation (total busy hours / total available hours) is only about 50%. Shouldn't our couriers be busy all the time?  
-Simply put, no. In the presence of variable demand (which is a natural quality of the food delivery business) high capacity utilisation causes significant growth in delivery time which directly affects customer experience.  
-However, there's always a sweet spot which balances efficiency with customer experience. Let's say for our system the optimal capacity ulitisation is 80%. And we can set ourselves an ambitious target to maintain it throughout the day.
+Hm, our average utilisation (total busy hours / total available hours) is only about 50%. Shouldn't our couriers be busy all the time?  
+Simply put, no. In the presence of variable demand (which is a natural quality of the food delivery business) high utilisation causes significant growth in delivery time which directly affects customer experience.  
+However, there's always a sweet spot which balances efficiency with customer experience. Let's say for our system the optimal ulitisation is 80%. And we can set ourselves an ambitious target to maintain it throughout the day.
 
-// add an image (plot) of capacity utilisation before and after
+// add an image (plot) of utilisation before and after
 
 Alright, let's now build a shifts schedule for our couriers that conforms to this level of capacity.
 
