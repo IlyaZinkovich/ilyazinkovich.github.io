@@ -13,24 +13,25 @@ published: false
 ---
 
 [Last time](https://bit.ly/37Omcpz) we discussed how to boost the performance of a food delivery service by the use of advanced dispatching algorithms. Despite all the innovation we can do on that front, dispatching algorithms don't perform well when there're simply not enough couriers around.  
-To meet the expected level of demand we need to hire and manage our couriers accordingly, providing them healthy working conditions and maximising their profits.  
-This problem is not unique and was solved already in various contexts: from the bus lines scheduling to the proactive scaling of the cloud servers.  
+To meet the expected level of demand we need to hire and manage our couriers accordingly, ensuring that there's always the right number of couriers at the times when we need them.  
+This problem is not unique and is relevant in various contexts: from the bus lines scheduling to the proactive scaling of the cloud servers.  
+Let's dig into one possible solution.  
 
 <!--more-->
 
 ## Challenge
 
-Couriers hiring and management is pretty chaotic in the beginning. We start forming our fleet out of full-time salaried couriers to support basic operations and then experiment with adding the part-timers to boost the system performance during periods of high demand. After applying all of our efforts we appear in the following situtation - couriers spend only about 50% of their time delivering orders.  
+Couriers hiring and management is pretty chaotic in the new food delivery startup. We start forming our fleet out of full-time salaried couriers to support basic operations and then experiment with adding the part-timers to boost the system performance during periods of high demand. After applying all of our efforts we appear in the following situtation - couriers spend only about 50% of their time delivering orders.  
 
 ![alt text](/images/posts/2020-07-16-shifts-planning--hourly-couriers-engagement-zoom-out.svg?style=centered "Couriers Engagement Zoom Out")  
 
-If we zoom in and check hourly couriers' engagement, we'll see a clear reason for this - our supply is not elastic enough. Periods of very high engagement alternate with periods of low.  
+If we zoom in and check hourly couriers' engagement, we'll see a clear reason for this - our supply is not elastic enough. Periods of very high engagement alternate with very low.  
 
 ![alt text](/images/posts/2020-07-16-shifts-planning--hourly-couriers-engagement-zoom-in.svg?style=centered "Couriers Engagement Zoom In")  
 
-Another question is: shouldn't the couriers be busy all the time?
-Simply put, no. In the presence of variable demand (which is a natural quality of the food delivery business) high utilisation causes significant growth in delivery time which directly affects customer experience.  
-However, there's always a sweet spot which balances efficiency with customer experience. Let's say for our system the optimal ulitisation is 80%. And we can set ourselves an ambitious target to maintain it throughout the day.
+Given this information, a natural question arises: what is the ideal couriers engagement? Shouldn't the couriers be busy all the time?
+Simply put, no. In the presence of variable demand (which is a reality of the food delivery startups) high utilisation causes significant growth in delivery time which directly affects customer experience.  
+However, there's always a sweet spot which balances efficiency with customer experience. Let's assume for our current system this balance is achieved at 80% couriers engagement. As we set ourselves an ambitious target to maintain it throughout the day the picture should change as follows.  
 
 ![alt text](/images/posts/2020-07-16-shifts-planning--hourly-couriers-engagement-ideal.svg?style=centered "Couriers Engagement Ideal")  
 
@@ -49,8 +50,7 @@ In return, the automated solver gives us the values of variables that minimise t
 
 ## Modelling
 
-// only full-timers infeasible
-// only part-timers feasible
+// only full-timers
 // add part-timers
 
 The variables will be the number of captains in a shift.
