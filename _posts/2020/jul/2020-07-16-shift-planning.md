@@ -37,7 +37,7 @@ However, there's always a sweet spot which balances efficiency with customer exp
 
 Alright, let's now build a shifts schedule for our couriers that conforms to this level of capacity.
 
-## Linear Programming
+## Linear Programming Overview
 
 In order to solve this problem, we'll use a mathematical method called [Linear Programming](https://en.wikipedia.org/wiki/Linear_programming) in a way that is supported by the modern programming libraries like [SciPy](https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.optimize.linprog.html).  
 
@@ -48,10 +48,39 @@ This method requires us to specify:
 
 In return, the automated solver gives us the values of variables that minimise the cost function.  
 
-## Modelling
+## Solution
+
+Let's start modelling the full-timers shifts.
+At first, we need two variables: one for the number of couriers in the morning shift, another - for the evening shift.
+Combining these variables with our capacity requirements for each hour of a day we'll get the following system of equations:
+
+Xmorning = 20 (required number of couriers at 7:00AM)
+Xmorning = 30 (8:00AM)
+...
+Xmorning + Xevening = 100 (2:00PM)
+...
+Xevening = 40 (9:00PM)
+Xevening = 30 (10:00PM)
+
+As you can see, this system doesn't have a solution, because the same variable cannot have two values (e.g. Xmorning = 20 and Xmorning = 30).
+In order to proceed with our approach, we need to add slack variables to every equation.
+
+Xmorning + Xslack7 = 20 (7:00AM)
+Xmorning + Xslack8 = 30 (8:00AM)
+...
+Xmorning + Xevening + Xslack14 = 100 (2:00PM)
+...
+Xevening + Xslack21 = 40 (9:00PM)
+Xevening + Xslack22 = 30 (10:00PM)
+
+These variables will determine the number of couriers above the required level of capacity.  
+
+Our goal then becomes the minimisation of the total number of couriers working hours a day along with the minimisation of excess capacity.
+Formulated as a cost function it will look as follows: 9 * Xmorning + 9 * Xevening + sum(Xslack(i))
+
+The solver gives the following solution for this problem:
 
 // only full-timers
-// add part-timers
 
 The variables will be the number of captains in a shift.
 We'll have two 9-hour full-time shifts: one that starts in the morning and another one that ends in the evening.
