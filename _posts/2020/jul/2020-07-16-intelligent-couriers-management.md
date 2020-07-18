@@ -86,4 +86,4 @@ The solver uses this information and gets us the following result.
 With this schedule our couriers engagement goes up from 55% to 73%.  
 It's a great result on its own, but it's even more important that we've built a whole model that can adjust to new data and new business constraints - the model that grows with the business and maintains its efficiency.  
 
-To access the solver code, visit my GitHub repo: [https://github.com/IlyaZinkovich/courier-shifts-planning/blob/master/analysis.ipynb](https://bit.ly/3fLW7KM)
+To access the solver code, visit [my GitHub repo](https://bit.ly/3fLW7KM).
