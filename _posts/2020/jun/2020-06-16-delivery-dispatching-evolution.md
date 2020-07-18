@@ -36,18 +36,18 @@ In this situation, two orders are competing for couriers. The first assigned wil
 Instead of relying on pure luck, we can use some portion of food preparation time to batch the orders and then run a fair algorithm that will choose the economically best assignment.  
 Fortunately, we have a mathematical model for that called [Assignment Problem](https://en.wikipedia.org/wiki/Assignment_problem) with a reliable [Hungarian Algorithm](https://en.wikipedia.org/wiki/Hungarian_algorithm) that solves it. The only thing we need is to define the criteria for the algorithm to compare the alternatives, known as the cost function. For instance, we can say that each assignment incurrs the waiting cost (if the courier arrives too early) and the delay cost (if the captain arrives too late). The algorithm will use this information and dispatch the orders minimising the total cost.  
 
-![alt text](/images/posts/2020-06-07-deliveries-dispatching-evolution--assignment-problem.svg?style=centered "Assignment Problem")
+![alt text](/images/posts/2020-06-07-deliveries-dispatching-evolution/assignment-problem.svg?style=centered "Assignment Problem")
 
 ## Level 2. Pooling
 
 As our service becomes more popular, we start experiencing periods when the demand for our service significantly outstrips the economically viable level of supply, which leads to an increased number of delays and cancellations. The difference between the number of incoming orders and the number of available couriers looks as follows.  
 
-![alt text](/images/posts/2020-06-07-deliveries-dispatching-evolution--supply-demand.svg?style=centered "Supply Demand Mismatch")
+![alt text](/images/posts/2020-06-07-deliveries-dispatching-evolution/supply-demand.svg?style=centered "Supply Demand Mismatch")
 
 How can we solve this problem? - Do more with less. Or, more precisely, group orders by restaurant and let a single courier deliver multiple orders at a time.  
 The problem is that the Hungarian Algorithm does only 1-1 assignments. To prove that our idea works without a major rewrite, we can hack it a little - generate multi-order routes (with some greedy/brute-force algorithm) and then assign routes as a unit of work.  
 
-![alt text](/images/posts/2020-06-07-deliveries-dispatching-evolution--basic-pooling.svg?style=centered "Supply Demand Mismatch")
+![alt text](/images/posts/2020-06-07-deliveries-dispatching-evolution/basic-pooling.svg?style=centered "Supply Demand Mismatch")
 
 ## Level X. Heavy Machinery
 
