@@ -8,7 +8,7 @@ keywords:
   - optimization
   - algorithms
 categories: algorithms
-urlimage: 
+urlimage: https://ilyazinkovich.github.io/images/posts/2020-07-16-intelligent-couriers-management/full-timers-part-timers-shifts.svg
 published: true
 ---
 
