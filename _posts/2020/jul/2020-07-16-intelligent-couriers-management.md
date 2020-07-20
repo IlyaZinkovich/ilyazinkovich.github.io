@@ -20,7 +20,7 @@ In this article, we'll discuss how a universal method from applied maths can hel
 
 ## Challenge
 
-Couriers management can be pretty chaotic in the food delivery business. We start forming our fleet with full-time salaried couriers to support core operations. Then we experiment with adding the part-timers to boost the system performance during periods of high demand. As a result, we appear in a situation when our couriers spend only about 50% of their time delivering orders.  
+Couriers management can be pretty chaotic in the food delivery business. We start forming our fleet with full-time salaried couriers to support core operations. Then we experiment with adding the part-timers to boost the system performance during periods of high demand. As a result, we appear in a situation when our couriers spend only about half of their time delivering orders.  
 
 ![alt text](/images/posts/2020-07-16-intelligent-couriers-management/hourly-couriers-engagement-zoom-out.svg?style=centered "Couriers Engagement Zoom Out")  
 
