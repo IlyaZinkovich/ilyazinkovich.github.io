@@ -55,7 +55,7 @@ Combining these variables with our capacity requirements for each working hour o
 
 ![alt text](/images/posts/2020-07-16-intelligent-couriers-management/full-timers.svg?style=centered "Full Timers")  
 
-As you can see, there is no solution because the same variable cannot have two distinct values (e.g. Xmorning = 20 and Xmorning = 30).
+As you can see, there is no solution because the same variable cannot have two distinct values (e.g. Xmorning = 6 and Xmorning = 18).
 To proceed with our modeling approach, we need to subtract slack variables, which represent extra capacity in every equation.
 
 ![alt text](/images/posts/2020-07-16-intelligent-couriers-management/full-timers-slack.svg?style=centered "Full Timers - Slack")  
