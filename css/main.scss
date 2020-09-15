@@ -84,10 +84,12 @@ div.subline {
   ul {
     margin-left: 0em;
     color: gray;
+    height: 36px;
   }
   ul li {
     list-style: none;
     display: inline;
+    line-height: 36px;
   }
   ul li:after {
     content: " \00b7";
