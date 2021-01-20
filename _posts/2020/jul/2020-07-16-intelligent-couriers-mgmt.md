@@ -1,7 +1,7 @@
 ---
 layout: post
 date: 2020-07-16
-title: "Intelligent Couriers Management"
+title: "Data-Driven Couriers Management"
 description: |
 keywords:
   - deliveries
@@ -13,7 +13,7 @@ published: true
 ---
 
 [Last time](https://bit.ly/37Omcpz) we discussed how to boost the performance of a food delivery service using advanced dispatching algorithms. Despite all the innovation on that front, dispatching algorithms don't perform well when there are just not enough couriers around.  
-To satisfy the expected level of demand, we need to hire and manage our couriers intelligently, ensuring that there's always the right number of couriers available all the time.  
+To satisfy the expected level of demand, we need to hire and manage our couriers in a data-driven fashion, ensuring that there's always the right number of couriers available all the time.  
 In this article, we'll discuss how a universal method from applied maths can help us to solve this problem.  
 
 <!--more-->
